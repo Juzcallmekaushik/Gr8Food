@@ -21,6 +21,7 @@ namespace Gr8Food
         {
             CreateDatabaseIfNeeded();
             CreateTablesIfNeeded();
+            ApplySchemaUpgrades();
             SeedDataIfNeeded();
         }
 
@@ -120,6 +121,105 @@ BEGIN
         CONSTRAINT FK_Feedbacks_Users FOREIGN KEY (CustomerUserId) REFERENCES dbo.Users(UserId)
     );
 END;";
+
+            using (SqlConnection connection = CreateConnection())
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        private static void ApplySchemaUpgrades()
+        {
+            string sql = string.Format(@"
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Users_Role')
+BEGIN
+    ALTER TABLE dbo.Users
+    ADD CONSTRAINT CK_Users_Role CHECK ([Role] IN ('{0}', '{1}', '{2}', '{3}'));
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Users_WalletBalance')
+BEGIN
+    ALTER TABLE dbo.Users
+    ADD CONSTRAINT CK_Users_WalletBalance CHECK (WalletBalance >= 0);
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_MenuItems_Category')
+BEGIN
+    ALTER TABLE dbo.MenuItems
+    ADD CONSTRAINT CK_MenuItems_Category CHECK (Category IN ('{4}', '{5}', '{6}', '{7}', '{8}'));
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_MenuItems_Price')
+BEGIN
+    ALTER TABLE dbo.MenuItems
+    ADD CONSTRAINT CK_MenuItems_Price CHECK (Price > 0);
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_MenuItems_Name')
+BEGIN
+    ALTER TABLE dbo.MenuItems
+    ADD CONSTRAINT CK_MenuItems_Name CHECK (LEN(LTRIM(RTRIM([Name]))) > 0);
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Orders_Status')
+BEGIN
+    ALTER TABLE dbo.Orders
+    ADD CONSTRAINT CK_Orders_Status CHECK ([Status] IN ('{9}', '{10}', '{11}', '{12}'));
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Orders_Category')
+BEGIN
+    ALTER TABLE dbo.Orders
+    ADD CONSTRAINT CK_Orders_Category CHECK (Category IN ('{4}', '{5}', '{6}', '{7}', '{8}'));
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Orders_Price')
+BEGIN
+    ALTER TABLE dbo.Orders
+    ADD CONSTRAINT CK_Orders_Price CHECK (Price > 0);
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_WalletTransactions_Amount')
+BEGIN
+    ALTER TABLE dbo.WalletTransactions
+    ADD CONSTRAINT CK_WalletTransactions_Amount CHECK (Amount > 0);
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_WalletTransactions_Type')
+BEGIN
+    ALTER TABLE dbo.WalletTransactions
+    ADD CONSTRAINT CK_WalletTransactions_Type CHECK ([Type] IN ('{13}', '{14}', '{15}'));
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Feedbacks_Message')
+BEGIN
+    ALTER TABLE dbo.Feedbacks
+    ADD CONSTRAINT CK_Feedbacks_Message CHECK (LEN(LTRIM(RTRIM([Message]))) > 0);
+END;
+
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Feedbacks_Reply')
+BEGIN
+    ALTER TABLE dbo.Feedbacks
+    ADD CONSTRAINT CK_Feedbacks_Reply CHECK ([Reply] IS NULL OR LEN(LTRIM(RTRIM([Reply]))) > 0);
+END;",
+                DomainRules.RoleAdmin,
+                DomainRules.RoleManager,
+                DomainRules.RoleChef,
+                DomainRules.RoleCustomer,
+                DomainRules.CategoryBreakfast,
+                DomainRules.CategoryLunch,
+                DomainRules.CategoryDinner,
+                DomainRules.CategorySnacks,
+                DomainRules.CategoryDrinks,
+                DomainRules.OrderStatusPending,
+                DomainRules.OrderStatusInProgress,
+                DomainRules.OrderStatusCompleted,
+                DomainRules.OrderStatusCancelled,
+                DomainRules.WalletTypeTopUp,
+                DomainRules.WalletTypePayment,
+                DomainRules.WalletTypeRefund);
 
             using (SqlConnection connection = CreateConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))

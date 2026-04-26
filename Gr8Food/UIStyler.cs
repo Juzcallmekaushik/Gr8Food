@@ -80,11 +80,19 @@ namespace Gr8Food
                     continue;
                 }
 
-                if (control is Button button)
+                Button button = control as Button;
+                TextBox textBox = control as TextBox;
+                ListBox listBox = control as ListBox;
+                ComboBox comboBox = control as ComboBox;
+                DateTimePicker dateTimePicker = control as DateTimePicker;
+                CheckBox checkBox = control as CheckBox;
+                Label label = control as Label;
+
+                if (button != null)
                 {
                     StyleButton(button);
                 }
-                else if (control is TextBox textBox)
+                else if (textBox != null)
                 {
                     textBox.BorderStyle = BorderStyle.FixedSingle;
                     textBox.BackColor = Color.White;
@@ -94,29 +102,29 @@ namespace Gr8Food
                         textBox.ScrollBars = ScrollBars.Vertical;
                     }
                 }
-                else if (control is ListBox listBox)
+                else if (listBox != null)
                 {
                     listBox.BackColor = Surface;
                     listBox.ForeColor = Text;
                     listBox.BorderStyle = BorderStyle.FixedSingle;
                     listBox.IntegralHeight = false;
                 }
-                else if (control is ComboBox comboBox)
+                else if (comboBox != null)
                 {
                     comboBox.BackColor = Color.White;
                     comboBox.ForeColor = Text;
                     comboBox.FlatStyle = FlatStyle.Flat;
                 }
-                else if (control is DateTimePicker dateTimePicker)
+                else if (dateTimePicker != null)
                 {
                     dateTimePicker.CalendarMonthBackground = Color.White;
                     dateTimePicker.CalendarForeColor = Text;
                 }
-                else if (control is CheckBox checkBox)
+                else if (checkBox != null)
                 {
                     checkBox.ForeColor = Text;
                 }
-                else if (control is Label label)
+                else if (label != null)
                 {
                     label.ForeColor = Text;
                     label.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);

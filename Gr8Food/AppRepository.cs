@@ -125,6 +125,11 @@ ORDER BY Username;";
 
         public static void AddUser(string username, string fullName, string password, string role)
         {
+            username = InputValidator.ValidateUsername(username);
+            fullName = InputValidator.ValidateFullName(fullName);
+            password = InputValidator.ValidatePassword(password);
+            role = InputValidator.ValidateRole(role);
+
             const string sql = @"
 INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
 VALUES (@Username, @FullName, @Password, @Role, 100.00);";
@@ -141,17 +146,26 @@ VALUES (@Username, @FullName, @Password, @Role, 100.00);";
             }
         }
 
-        public static void UpdateUserByAdmin(int userId, string password, string role)
+        public static void UpdateUserByAdmin(int userId, string username, string fullName, string password, string role)
         {
+            username = InputValidator.ValidateUsername(username);
+            fullName = InputValidator.ValidateFullName(fullName);
+            password = InputValidator.ValidatePassword(password);
+            role = InputValidator.ValidateRole(role);
+
             const string sql = @"
 UPDATE dbo.Users
-SET [Password] = @Password,
+SET Username = @Username,
+    FullName = @FullName,
+    [Password] = @Password,
     [Role] = @Role
 WHERE UserId = @UserId;";
 
             using (SqlConnection connection = Database.CreateConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
+                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@FullName", fullName);
                 command.Parameters.AddWithValue("@Password", password);
                 command.Parameters.AddWithValue("@Role", role);
                 command.Parameters.AddWithValue("@UserId", userId);
@@ -204,6 +218,10 @@ WHERE Username = @Username
 
         public static User UpdateOwnProfile(int userId, string username, string fullName, string password)
         {
+            username = InputValidator.ValidateUsername(username);
+            fullName = InputValidator.ValidateFullName(fullName);
+            password = InputValidator.ValidatePassword(password);
+
             const string sql = @"
 UPDATE dbo.Users
 SET Username = @Username,
@@ -227,6 +245,11 @@ WHERE UserId = @UserId;";
 
         public static List<SalesReportItem> GetSalesReport(int month, int year, int? chefUserId, string category)
         {
+            if (!string.Equals(category, DomainRules.CategoryAll, StringComparison.OrdinalIgnoreCase))
+            {
+                category = InputValidator.ValidateCategory(category);
+            }
+
             const string sql = @"
 SELECT OrderId, ItemName, Category, ChefName, CustomerName, Price, [Status], OrderDate
 FROM dbo.Orders
@@ -296,6 +319,10 @@ ORDER BY m.Category, m.Name;";
 
         public static void AddMenuItem(int chefUserId, string name, string category, decimal price, bool isAvailable)
         {
+            name = InputValidator.ValidateMenuItemName(name);
+            category = InputValidator.ValidateCategory(category);
+            price = InputValidator.ValidatePositiveAmount("Price", price);
+
             using (SqlConnection connection = Database.CreateConnection())
             using (SqlCommand command = new SqlCommand(@"
 INSERT INTO dbo.MenuItems (ChefUserId, [Name], Category, Price, IsAvailable)
@@ -313,6 +340,10 @@ VALUES (@ChefUserId, @Name, @Category, @Price, @IsAvailable);", connection))
 
         public static void UpdateMenuItem(int menuItemId, int chefUserId, string name, string category, decimal price, bool isAvailable)
         {
+            name = InputValidator.ValidateMenuItemName(name);
+            category = InputValidator.ValidateCategory(category);
+            price = InputValidator.ValidatePositiveAmount("Price", price);
+
             using (SqlConnection connection = Database.CreateConnection())
             using (SqlCommand command = new SqlCommand(@"
 UPDATE dbo.MenuItems
@@ -369,6 +400,12 @@ ORDER BY OrderDate DESC;", new SqlParameter("@CustomerUserId", customerUserId));
 
         public static void UpdateOrderStatus(int orderId, int chefUserId, string currentStatus, string newStatus)
         {
+            if (!DomainRules.ContainsIgnoreCase(DomainRules.OrderStatuses, currentStatus) ||
+                !DomainRules.ContainsIgnoreCase(DomainRules.OrderStatuses, newStatus))
+            {
+                throw new InvalidOperationException("A valid order status is required.");
+            }
+
             using (SqlConnection connection = Database.CreateConnection())
             using (SqlCommand command = new SqlCommand(@"
 UPDATE dbo.Orders
@@ -459,17 +496,18 @@ WHERE UserId = @UserId;";
 
                         using (SqlCommand walletCommand = new SqlCommand(@"
 INSERT INTO dbo.WalletTransactions (CustomerUserId, CustomerName, Amount, [Type], TransactionDate)
-VALUES (@CustomerUserId, @CustomerName, @Amount, 'Payment', GETDATE());", connection, transaction))
+VALUES (@CustomerUserId, @CustomerName, @Amount, @Type, GETDATE());", connection, transaction))
                         {
                             walletCommand.Parameters.AddWithValue("@CustomerUserId", customerUserId);
                             walletCommand.Parameters.AddWithValue("@CustomerName", customer.FullName);
                             walletCommand.Parameters.AddWithValue("@Amount", menuItem.Price);
+                            walletCommand.Parameters.AddWithValue("@Type", DomainRules.WalletTypePayment);
                             walletCommand.ExecuteNonQuery();
                         }
 
                         using (SqlCommand orderCommand = new SqlCommand(@"
 INSERT INTO dbo.Orders (CustomerUserId, ChefUserId, CustomerName, ChefName, ItemName, Category, Price, [Status], OrderDate)
-VALUES (@CustomerUserId, @ChefUserId, @CustomerName, @ChefName, @ItemName, @Category, @Price, 'Pending', GETDATE());", connection, transaction))
+VALUES (@CustomerUserId, @ChefUserId, @CustomerName, @ChefName, @ItemName, @Category, @Price, @Status, GETDATE());", connection, transaction))
                         {
                             orderCommand.Parameters.AddWithValue("@CustomerUserId", customerUserId);
                             orderCommand.Parameters.AddWithValue("@ChefUserId", menuItem.ChefUserId);
@@ -478,6 +516,7 @@ VALUES (@CustomerUserId, @ChefUserId, @CustomerName, @ChefName, @ItemName, @Cate
                             orderCommand.Parameters.AddWithValue("@ItemName", menuItem.Name);
                             orderCommand.Parameters.AddWithValue("@Category", menuItem.Category);
                             orderCommand.Parameters.AddWithValue("@Price", menuItem.Price);
+                            orderCommand.Parameters.AddWithValue("@Status", DomainRules.OrderStatusPending);
                             orderCommand.ExecuteNonQuery();
                         }
 
@@ -525,17 +564,18 @@ WHERE OrderId = @OrderId
                             throw new InvalidOperationException("The selected order could not be found.");
                         }
 
-                        if (!string.Equals(order.Status, "Pending", StringComparison.OrdinalIgnoreCase))
+                        if (!string.Equals(order.Status, DomainRules.OrderStatusPending, StringComparison.OrdinalIgnoreCase))
                         {
                             throw new InvalidOperationException("Only pending orders can be cancelled.");
                         }
 
                         using (SqlCommand updateOrderCommand = new SqlCommand(
-                            "UPDATE dbo.Orders SET [Status] = 'Cancelled' WHERE OrderId = @OrderId;",
+                            "UPDATE dbo.Orders SET [Status] = @Status WHERE OrderId = @OrderId;",
                             connection,
                             transaction))
                         {
                             updateOrderCommand.Parameters.AddWithValue("@OrderId", orderId);
+                            updateOrderCommand.Parameters.AddWithValue("@Status", DomainRules.OrderStatusCancelled);
                             updateOrderCommand.ExecuteNonQuery();
                         }
 
@@ -551,11 +591,12 @@ WHERE OrderId = @OrderId
 
                         using (SqlCommand refundCommand = new SqlCommand(@"
 INSERT INTO dbo.WalletTransactions (CustomerUserId, CustomerName, Amount, [Type], TransactionDate)
-SELECT UserId, FullName, @Amount, 'Refund', GETDATE()
+SELECT UserId, FullName, @Amount, @Type, GETDATE()
 FROM dbo.Users
 WHERE UserId = @UserId;", connection, transaction))
                         {
                             refundCommand.Parameters.AddWithValue("@Amount", order.Price);
+                            refundCommand.Parameters.AddWithValue("@Type", DomainRules.WalletTypeRefund);
                             refundCommand.Parameters.AddWithValue("@UserId", customerUserId);
                             refundCommand.ExecuteNonQuery();
                         }
@@ -573,6 +614,8 @@ WHERE UserId = @UserId;", connection, transaction))
 
         public static void TopUpWallet(int customerUserId, decimal amount)
         {
+            amount = InputValidator.ValidatePositiveAmount("Top-up amount", amount);
+
             using (SqlConnection connection = Database.CreateConnection())
             {
                 connection.Open();
@@ -592,11 +635,12 @@ WHERE UserId = @UserId;", connection, transaction))
 
                         using (SqlCommand walletTransactionCommand = new SqlCommand(@"
 INSERT INTO dbo.WalletTransactions (CustomerUserId, CustomerName, Amount, [Type], TransactionDate)
-SELECT UserId, FullName, @Amount, 'Top Up', GETDATE()
+SELECT UserId, FullName, @Amount, @Type, GETDATE()
 FROM dbo.Users
 WHERE UserId = @UserId;", connection, transaction))
                         {
                             walletTransactionCommand.Parameters.AddWithValue("@Amount", amount);
+                            walletTransactionCommand.Parameters.AddWithValue("@Type", DomainRules.WalletTypeTopUp);
                             walletTransactionCommand.Parameters.AddWithValue("@UserId", customerUserId);
                             walletTransactionCommand.ExecuteNonQuery();
                         }
@@ -670,6 +714,8 @@ ORDER BY FeedbackDate DESC;", new SqlParameter("@CustomerUserId", customerUserId
 
         public static void AddFeedback(int orderId, int customerUserId, string message)
         {
+            message = InputValidator.ValidateFeedbackMessage(message, "Feedback");
+
             using (SqlConnection connection = Database.CreateConnection())
             {
                 connection.Open();
@@ -679,10 +725,11 @@ SELECT COUNT(1)
 FROM dbo.Orders
 WHERE OrderId = @OrderId
   AND CustomerUserId = @CustomerUserId
-  AND [Status] = 'Completed';", connection))
+  AND [Status] = @Status;", connection))
                 {
                     orderCheckCommand.Parameters.AddWithValue("@OrderId", orderId);
                     orderCheckCommand.Parameters.AddWithValue("@CustomerUserId", customerUserId);
+                    orderCheckCommand.Parameters.AddWithValue("@Status", DomainRules.OrderStatusCompleted);
                     if (Convert.ToInt32(orderCheckCommand.ExecuteScalar()) == 0)
                     {
                         throw new InvalidOperationException("Feedback can only be sent for your completed orders.");
@@ -715,6 +762,8 @@ WHERE o.OrderId = @OrderId;", connection))
 
         public static void ReplyToFeedback(int feedbackId, string reply)
         {
+            reply = InputValidator.ValidateFeedbackMessage(reply, "Reply");
+
             using (SqlConnection connection = Database.CreateConnection())
             using (SqlCommand command = new SqlCommand(@"
 UPDATE dbo.Feedbacks

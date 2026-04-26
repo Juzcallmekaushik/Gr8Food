@@ -49,7 +49,7 @@ namespace Gr8Food
 
         private void LoadCustomers()
         {
-            List<User> customers = AppRepository.GetUsersByRole("Customer");
+            List<User> customers = AppRepository.GetUsersByRole(DomainRules.RoleCustomer);
             cmbCustomer.Items.Clear();
             cmbCustomer.Items.Add("All");
             foreach (User customer in customers)
@@ -81,6 +81,20 @@ namespace Gr8Food
                 return;
             }
 
+            if (!string.IsNullOrWhiteSpace(feedback.Reply))
+            {
+                DialogResult overwriteReply = MessageBox.Show(
+                    "This feedback already has a reply. Do you want to replace it?",
+                    "Replace Reply",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (overwriteReply != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
             string reply = txtReply.Text.Trim();
             if (string.IsNullOrWhiteSpace(reply))
             {
@@ -88,10 +102,17 @@ namespace Gr8Food
                 return;
             }
 
-            AppRepository.ReplyToFeedback(feedback.FeedbackId, reply);
-            MessageBox.Show("Reply sent successfully.");
-            txtReply.Clear();
-            LoadFeedback();
+            try
+            {
+                AppRepository.ReplyToFeedback(feedback.FeedbackId, reply);
+                MessageBox.Show("Reply sent successfully.");
+                txtReply.Clear();
+                LoadFeedback();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnFilterWallet_Click(object sender, EventArgs e)

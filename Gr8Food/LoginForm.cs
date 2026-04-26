@@ -41,13 +41,13 @@ namespace Gr8Food
             Form destinationForm;
             switch (user.Role)
             {
-                case "Admin":
+                case DomainRules.RoleAdmin:
                     destinationForm = new AdminForm();
                     break;
-                case "Manager":
+                case DomainRules.RoleManager:
                     destinationForm = new ManagerForm();
                     break;
-                case "Chef":
+                case DomainRules.RoleChef:
                     destinationForm = new ChefForm();
                     break;
                 default:

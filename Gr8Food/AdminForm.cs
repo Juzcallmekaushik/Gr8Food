@@ -36,17 +36,17 @@ namespace Gr8Food
         private void LoadRoleOptions()
         {
             cmbRole.Items.Clear();
-            cmbRole.Items.AddRange(new object[] { "Admin", "Manager", "Chef", "Customer" });
-            cmbRole.SelectedIndex = 3;
+            cmbRole.Items.AddRange(DomainRules.Roles);
+            cmbRole.SelectedItem = DomainRules.RoleCustomer;
 
             cmbEditRole.Items.Clear();
-            cmbEditRole.Items.AddRange(new object[] { "Admin", "Manager", "Chef", "Customer" });
+            cmbEditRole.Items.AddRange(DomainRules.Roles);
         }
 
         private void LoadCategories()
         {
             cmbCategory.Items.Clear();
-            cmbCategory.Items.AddRange(new object[] { "All", "Breakfast", "Lunch", "Dinner", "Snacks", "Drinks" });
+            cmbCategory.Items.AddRange(DomainRules.ReportCategories);
             cmbCategory.SelectedIndex = 0;
         }
 
@@ -59,11 +59,11 @@ namespace Gr8Food
 
         private void LoadChefs()
         {
-            List<User> chefs = AppRepository.GetUsersByRole("Chef");
+            List<User> chefs = AppRepository.GetUsersByRole(DomainRules.RoleChef);
             object currentSelection = cmbChef.SelectedItem;
 
             cmbChef.Items.Clear();
-            cmbChef.Items.Add("All");
+            cmbChef.Items.Add(DomainRules.CategoryAll);
             foreach (User chef in chefs)
             {
                 cmbChef.Items.Add(chef);
@@ -88,7 +88,7 @@ namespace Gr8Food
                 chefUserId = selectedChef.UserId;
             }
 
-            string category = cmbCategory.SelectedItem == null ? "All" : cmbCategory.SelectedItem.ToString();
+            string category = cmbCategory.SelectedItem == null ? DomainRules.CategoryAll : cmbCategory.SelectedItem.ToString();
             lstReport.DataSource = null;
             lstReport.DataSource = AppRepository.GetSalesReport(dtFilter.Value.Month, dtFilter.Value.Year, chefUserId, category);
         }
@@ -100,28 +100,26 @@ namespace Gr8Food
             string role = Convert.ToString(cmbRole.SelectedItem);
             string fullName = txtFullName.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(username) ||
-                string.IsNullOrWhiteSpace(password) ||
-                string.IsNullOrWhiteSpace(role) ||
-                string.IsNullOrWhiteSpace(fullName))
+            try
             {
-                MessageBox.Show("Please fill in full name, username, password, and role.");
-                return;
-            }
+                if (AppRepository.UsernameExists(username, null))
+                {
+                    MessageBox.Show("Username already exists.");
+                    return;
+                }
 
-            if (AppRepository.UsernameExists(username, null))
+                AppRepository.AddUser(username, fullName, password, role);
+                MessageBox.Show("User added successfully.");
+                txtFullName.Clear();
+                txtNewUsername.Clear();
+                txtNewPassword.Clear();
+                cmbRole.SelectedItem = DomainRules.RoleCustomer;
+                RefreshData();
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Username already exists.");
-                return;
+                MessageBox.Show(ex.Message);
             }
-
-            AppRepository.AddUser(username, fullName, password, role);
-            MessageBox.Show("User added successfully.");
-            txtFullName.Clear();
-            txtNewUsername.Clear();
-            txtNewPassword.Clear();
-            cmbRole.SelectedIndex = 3;
-            RefreshData();
         }
 
         private void btnDeleteUser_Click(object sender, EventArgs e)
@@ -157,18 +155,27 @@ namespace Gr8Food
                 return;
             }
 
+            string username = txtEditUsername.Text.Trim();
+            string fullName = txtEditFullName.Text.Trim();
             string password = txtEditPassword.Text.Trim();
             string role = Convert.ToString(cmbEditRole.SelectedItem);
 
-            if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(role))
+            try
             {
-                MessageBox.Show("Please provide a password and role to update the selected user.");
-                return;
-            }
+                if (AppRepository.UsernameExists(username, selectedUser.UserId))
+                {
+                    MessageBox.Show("That username is already being used by another account.");
+                    return;
+                }
 
-            AppRepository.UpdateUserByAdmin(selectedUser.UserId, password, role);
-            MessageBox.Show("User updated successfully.");
-            RefreshData();
+                AppRepository.UpdateUserByAdmin(selectedUser.UserId, username, fullName, password, role);
+                MessageBox.Show("User updated successfully.");
+                RefreshData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -189,6 +196,8 @@ namespace Gr8Food
                 return;
             }
 
+            txtEditUsername.Text = user.Username;
+            txtEditFullName.Text = user.FullName;
             txtEditPassword.Text = user.Password;
             cmbEditRole.SelectedItem = user.Role;
         }

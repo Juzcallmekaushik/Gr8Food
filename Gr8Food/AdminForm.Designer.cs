@@ -42,6 +42,8 @@
             this.txtNewUsername = new System.Windows.Forms.TextBox();
             this.txtNewPassword = new System.Windows.Forms.TextBox();
             this.cmbRole = new System.Windows.Forms.ComboBox();
+            this.txtEditUsername = new System.Windows.Forms.TextBox();
+            this.txtEditFullName = new System.Windows.Forms.TextBox();
             this.txtEditPassword = new System.Windows.Forms.TextBox();
             this.cmbEditRole = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,6 +53,8 @@
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnProfile = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lstUsers
@@ -167,6 +171,7 @@
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(120, 22);
             this.txtNewPassword.TabIndex = 12;
+            this.txtNewPassword.UseSystemPasswordChar = true;
             // 
             // cmbRole
             // 
@@ -176,20 +181,35 @@
             this.cmbRole.Size = new System.Drawing.Size(121, 24);
             this.cmbRole.TabIndex = 13;
             // 
+            // txtEditUsername
+            // 
+            this.txtEditUsername.Location = new System.Drawing.Point(765, 215);
+            this.txtEditUsername.Name = "txtEditUsername";
+            this.txtEditUsername.Size = new System.Drawing.Size(125, 22);
+            this.txtEditUsername.TabIndex = 14;
+            // 
+            // txtEditFullName
+            // 
+            this.txtEditFullName.Location = new System.Drawing.Point(765, 243);
+            this.txtEditFullName.Name = "txtEditFullName";
+            this.txtEditFullName.Size = new System.Drawing.Size(125, 22);
+            this.txtEditFullName.TabIndex = 15;
+            // 
             // txtEditPassword
             // 
-            this.txtEditPassword.Location = new System.Drawing.Point(765, 243);
+            this.txtEditPassword.Location = new System.Drawing.Point(765, 271);
             this.txtEditPassword.Name = "txtEditPassword";
             this.txtEditPassword.Size = new System.Drawing.Size(125, 22);
-            this.txtEditPassword.TabIndex = 14;
+            this.txtEditPassword.TabIndex = 16;
+            this.txtEditPassword.UseSystemPasswordChar = true;
             // 
             // cmbEditRole
             // 
             this.cmbEditRole.FormattingEnabled = true;
-            this.cmbEditRole.Location = new System.Drawing.Point(765, 271);
+            this.cmbEditRole.Location = new System.Drawing.Point(765, 299);
             this.cmbEditRole.Name = "cmbEditRole";
             this.cmbEditRole.Size = new System.Drawing.Size(125, 24);
-            this.cmbEditRole.TabIndex = 15;
+            this.cmbEditRole.TabIndex = 17;
             // 
             // label1
             // 
@@ -212,7 +232,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(663, 249);
+            this.label3.Location = new System.Drawing.Point(663, 274);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 16);
             this.label3.TabIndex = 18;
@@ -221,7 +241,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(663, 274);
+            this.label4.Location = new System.Drawing.Point(663, 302);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 16);
             this.label4.TabIndex = 19;
@@ -253,11 +273,31 @@
             this.btnProfile.UseVisualStyleBackColor = true;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(663, 218);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 16);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Username";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(663, 246);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 16);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Full Name";
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(928, 450);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnProfile);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtFullName);
@@ -266,6 +306,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbEditRole);
+            this.Controls.Add(this.txtEditFullName);
+            this.Controls.Add(this.txtEditUsername);
             this.Controls.Add(this.txtEditPassword);
             this.Controls.Add(this.cmbRole);
             this.Controls.Add(this.txtNewPassword);
@@ -305,6 +347,8 @@
         private System.Windows.Forms.TextBox txtNewUsername;
         private System.Windows.Forms.TextBox txtNewPassword;
         private System.Windows.Forms.ComboBox cmbRole;
+        private System.Windows.Forms.TextBox txtEditUsername;
+        private System.Windows.Forms.TextBox txtEditFullName;
         private System.Windows.Forms.TextBox txtEditPassword;
         private System.Windows.Forms.ComboBox cmbEditRole;
         private System.Windows.Forms.Label label1;
@@ -314,5 +358,7 @@
         private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

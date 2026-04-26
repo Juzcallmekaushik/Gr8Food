@@ -33,35 +33,34 @@ namespace Gr8Food
             string password = txtPassword.Text.Trim();
             string confirmPassword = txtConfirmPassword.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(username) ||
-                string.IsNullOrWhiteSpace(fullName) ||
-                string.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("Please complete all profile fields.");
-                return;
-            }
-
             if (!string.Equals(password, confirmPassword, StringComparison.Ordinal))
             {
                 MessageBox.Show("Password and confirm password must match.");
                 return;
             }
 
-            if (AppRepository.UsernameExists(username, AppSession.CurrentUser.UserId))
+            try
             {
-                MessageBox.Show("That username is already being used by another account.");
-                return;
+                if (AppRepository.UsernameExists(username, AppSession.CurrentUser.UserId))
+                {
+                    MessageBox.Show("That username is already being used by another account.");
+                    return;
+                }
+
+                AppSession.CurrentUser = AppRepository.UpdateOwnProfile(
+                    AppSession.CurrentUser.UserId,
+                    username,
+                    fullName,
+                    password);
+
+                MessageBox.Show("Profile updated successfully.");
+                DialogResult = DialogResult.OK;
+                Close();
             }
-
-            AppSession.CurrentUser = AppRepository.UpdateOwnProfile(
-                AppSession.CurrentUser.UserId,
-                username,
-                fullName,
-                password);
-
-            MessageBox.Show("Profile updated successfully.");
-            DialogResult = DialogResult.OK;
-            Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

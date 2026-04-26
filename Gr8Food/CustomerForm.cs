@@ -120,7 +120,7 @@ namespace Gr8Food
                 return;
             }
 
-            if (!string.Equals(order.Status, "Completed", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(order.Status, DomainRules.OrderStatusCompleted, StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Feedback can only be sent after the order is completed.");
                 return;
@@ -138,17 +138,24 @@ namespace Gr8Food
         private void btnTopUp_Click(object sender, EventArgs e)
         {
             decimal amount;
-            if (!decimal.TryParse(txtTopUpAmount.Text.Trim(), out amount) || amount <= 0)
+            if (!decimal.TryParse(txtTopUpAmount.Text.Trim(), out amount))
             {
                 MessageBox.Show("Please enter a valid top-up amount.");
                 return;
             }
 
-            AppRepository.TopUpWallet(AppSession.CurrentUser.UserId, amount);
-            AppSession.CurrentUser = AppRepository.GetUserById(AppSession.CurrentUser.UserId);
-            MessageBox.Show("Top up successful.");
-            txtTopUpAmount.Clear();
-            Setup();
+            try
+            {
+                AppRepository.TopUpWallet(AppSession.CurrentUser.UserId, amount);
+                AppSession.CurrentUser = AppRepository.GetUserById(AppSession.CurrentUser.UserId);
+                MessageBox.Show("Top up successful.");
+                txtTopUpAmount.Clear();
+                Setup();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void txtTopUpAmount_KeyPress(object sender, KeyPressEventArgs e)

@@ -33,7 +33,7 @@ namespace Gr8Food
         private void Setup()
         {
             cmbCategory.Items.Clear();
-            cmbCategory.Items.AddRange(new object[] { "Breakfast", "Lunch", "Dinner", "Snacks", "Drinks" });
+            cmbCategory.Items.AddRange(DomainRules.MenuCategories);
             cmbCategory.SelectedIndex = 0;
             LoadMenu();
             LoadOrders();
@@ -58,16 +58,23 @@ namespace Gr8Food
             string name = txtMenuName.Text.Trim();
             decimal price;
 
-            if (string.IsNullOrWhiteSpace(name) || !decimal.TryParse(txtPrice.Text.Trim(), out price) || price <= 0)
+            if (!decimal.TryParse(txtPrice.Text.Trim(), out price))
             {
-                MessageBox.Show("Please enter a valid menu name and a price greater than zero.");
+                MessageBox.Show("Please enter a valid price.");
                 return;
             }
 
-            AppRepository.AddMenuItem(AppSession.CurrentUser.UserId, name, cmbCategory.Text, price, chkAvailable.Checked);
-            ClearMenuInputs();
-            LoadMenu();
-            MessageBox.Show("Menu item added successfully.");
+            try
+            {
+                AppRepository.AddMenuItem(AppSession.CurrentUser.UserId, name, cmbCategory.Text, price, chkAvailable.Checked);
+                ClearMenuInputs();
+                LoadMenu();
+                MessageBox.Show("Menu item added successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnEditMenu_Click(object sender, EventArgs e)
@@ -79,15 +86,22 @@ namespace Gr8Food
             }
 
             decimal price;
-            if (string.IsNullOrWhiteSpace(txtMenuName.Text.Trim()) || !decimal.TryParse(txtPrice.Text.Trim(), out price) || price <= 0)
+            if (!decimal.TryParse(txtPrice.Text.Trim(), out price))
             {
-                MessageBox.Show("Please enter a valid menu name and a price greater than zero.");
+                MessageBox.Show("Please enter a valid price.");
                 return;
             }
 
-            AppRepository.UpdateMenuItem(menuItem.MenuItemId, AppSession.CurrentUser.UserId, txtMenuName.Text.Trim(), cmbCategory.Text, price, chkAvailable.Checked);
-            MessageBox.Show("Menu item updated successfully.");
-            LoadMenu();
+            try
+            {
+                AppRepository.UpdateMenuItem(menuItem.MenuItemId, AppSession.CurrentUser.UserId, txtMenuName.Text.Trim(), cmbCategory.Text, price, chkAvailable.Checked);
+                MessageBox.Show("Menu item updated successfully.");
+                LoadMenu();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnDeleteMenu_Click(object sender, EventArgs e)
@@ -126,13 +140,13 @@ namespace Gr8Food
                 return;
             }
 
-            if (!string.Equals(order.Status, "Pending", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(order.Status, DomainRules.OrderStatusPending, StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Only pending orders can be marked as In Progress.");
                 return;
             }
 
-            AppRepository.UpdateOrderStatus(order.OrderId, AppSession.CurrentUser.UserId, "Pending", "In Progress");
+            AppRepository.UpdateOrderStatus(order.OrderId, AppSession.CurrentUser.UserId, DomainRules.OrderStatusPending, DomainRules.OrderStatusInProgress);
             LoadOrders();
             MessageBox.Show("Order marked as In Progress.");
         }
@@ -145,13 +159,13 @@ namespace Gr8Food
                 return;
             }
 
-            if (!string.Equals(order.Status, "In Progress", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(order.Status, DomainRules.OrderStatusInProgress, StringComparison.OrdinalIgnoreCase))
             {
                 MessageBox.Show("Only In Progress orders can be marked as Completed.");
                 return;
             }
 
-            AppRepository.UpdateOrderStatus(order.OrderId, AppSession.CurrentUser.UserId, "In Progress", "Completed");
+            AppRepository.UpdateOrderStatus(order.OrderId, AppSession.CurrentUser.UserId, DomainRules.OrderStatusInProgress, DomainRules.OrderStatusCompleted);
             LoadOrders();
             MessageBox.Show("Order marked as Completed.");
         }
