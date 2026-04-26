@@ -1,0 +1,468 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\chefform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\chefform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Gr8Food||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|c:\\users\\kaushik reddy\\documents\\cs degree\\ioop\\ioop_assignment\\gr8food\\gr8food\\managerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\managerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\feedbackform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\feedbackform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\datastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\datastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\databasesetup.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\databasesetup.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\menuitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\menuitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\profileform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\profileform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\wallettransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\wallettransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\apprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\apprepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\customerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\managerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\managerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\feedbackform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\feedbackform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\customerform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\customerform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\chefform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\chefform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\chefform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\chefform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\gr8food\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|solutionrelative:gr8food\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3A046A-E439-4950-8936-25372A8F8F19}|Gr8Food\\Gr8Food.csproj|c:\\users\\kaushik reddy\\documents\\cs degree\\ioop\\ioop_assignment\\gr8food\\gr8food\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DataStore.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\DataStore.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\DataStore.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\DataStore.cs",
+              "RelativeToolTip": "Gr8Food\\DataStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:54:14.414Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ManagerForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ManagerForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\ManagerForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ManagerForm.cs [Design]",
+              "RelativeToolTip": "Gr8Food\\ManagerForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:23:47.701Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\AdminForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\AdminForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\AdminForm.cs [Design]",
+              "RelativeToolTip": "Gr8Food\\AdminForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:06:37.604Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Gr8Food",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Gr8Food.csproj",
+              "RelativeDocumentMoniker": "Gr8Food\\Gr8Food.csproj",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Gr8Food.csproj",
+              "RelativeToolTip": "Gr8Food\\Gr8Food.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-26T11:10:00.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChefForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ChefForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\ChefForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ChefForm.cs [Design]",
+              "RelativeToolTip": "Gr8Food\\ChefForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:13:27.847Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Feedback.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\Feedback.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Feedback.cs",
+              "RelativeToolTip": "Gr8Food\\Feedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:53:45.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FeedbackForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\FeedbackForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\FeedbackForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\FeedbackForm.cs [Design]",
+              "RelativeToolTip": "Gr8Food\\FeedbackForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-04-15T05:46:18.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\LoginForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\LoginForm.cs [Design]",
+              "RelativeToolTip": "Gr8Food\\LoginForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-04-15T04:51:18.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DatabaseSetup.sql ",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\DatabaseSetup.sql",
+              "RelativeDocumentMoniker": "Gr8Food\\DatabaseSetup.sql",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\DatabaseSetup.sql",
+              "RelativeToolTip": "Gr8Food\\DatabaseSetup.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000853|",
+              "WhenOpened": "2026-04-25T09:40:19.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MenuItem.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\MenuItem.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\MenuItem.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\MenuItem.cs",
+              "RelativeToolTip": "Gr8Food\\MenuItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:51:49.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProfileForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ProfileForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\ProfileForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ProfileForm.cs [Design]",
+              "RelativeToolTip": "Gr8Food\\ProfileForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-04-26T11:05:30.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "WalletTransaction.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\WalletTransaction.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\WalletTransaction.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\WalletTransaction.cs",
+              "RelativeToolTip": "Gr8Food\\WalletTransaction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:53:16.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\User.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\User.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\User.cs",
+              "RelativeToolTip": "Gr8Food\\User.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:50:24.854Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Program.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\Program.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Program.cs",
+              "RelativeToolTip": "Gr8Food\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T11:10:12.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AppRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\AppRepository.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\AppRepository.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\AppRepository.cs",
+              "RelativeToolTip": "Gr8Food\\AppRepository.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-25T09:40:04.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CustomerForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\CustomerForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\CustomerForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\CustomerForm.cs [Design]",
+              "RelativeToolTip": "Gr8Food\\CustomerForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-04-15T05:36:41.629Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\App.config",
+              "RelativeDocumentMoniker": "Gr8Food\\App.config",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\App.config",
+              "RelativeToolTip": "Gr8Food\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-04-25T09:40:15.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Database.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Database.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\Database.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Database.cs",
+              "RelativeToolTip": "Gr8Food\\Database.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-25T09:40:16.289Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ManagerForm.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ManagerForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\ManagerForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ManagerForm.cs",
+              "RelativeToolTip": "Gr8Food\\ManagerForm.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAA7wC0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-04-15T06:25:12.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "LoginForm.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\LoginForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\LoginForm.cs",
+              "RelativeToolTip": "Gr8Food\\LoginForm.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwB0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-04-15T06:36:27.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CustomerForm.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\CustomerForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\CustomerForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\CustomerForm.cs",
+              "RelativeToolTip": "Gr8Food\\CustomerForm.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-04-15T06:25:35.616Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FeedbackForm.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\FeedbackForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\FeedbackForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\FeedbackForm.cs",
+              "RelativeToolTip": "Gr8Food\\FeedbackForm.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2026-04-15T12:44:19.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ChefForm.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ChefForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\ChefForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ChefForm.cs",
+              "RelativeToolTip": "Gr8Food\\ChefForm.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAwwIcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T06:25:25.214Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "CustomerForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\CustomerForm.Designer.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\CustomerForm.Designer.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\CustomerForm.Designer.cs",
+              "RelativeToolTip": "Gr8Food\\CustomerForm.Designer.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAADgv4YAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-04-15T13:09:22.44Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ChefForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ChefForm.Designer.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\ChefForm.Designer.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\ChefForm.Designer.cs",
+              "RelativeToolTip": "Gr8Food\\ChefForm.Designer.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAiwEgAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T11:56:15.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Order.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\Order.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\Order.cs",
+              "RelativeToolTip": "Gr8Food\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:52:15.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "LoginForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\LoginForm.Designer.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\LoginForm.Designer.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\LoginForm.Designer.cs",
+              "RelativeToolTip": "Gr8Food\\LoginForm.Designer.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAiwGcAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-04-15T06:43:06.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AdminForm.cs",
+              "DocumentMoniker": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\AdminForm.cs",
+              "RelativeDocumentMoniker": "Gr8Food\\AdminForm.cs",
+              "ToolTip": "C:\\Users\\Kaushik Reddy\\Documents\\CS Degree\\IOOP\\ioop_assignment\\Gr8Food\\Gr8Food\\AdminForm.cs",
+              "RelativeToolTip": "Gr8Food\\AdminForm.cs",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAjwKsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T06:24:51.446Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
