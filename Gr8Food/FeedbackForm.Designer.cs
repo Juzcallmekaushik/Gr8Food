@@ -34,7 +34,7 @@
             // 
             // txtFeedback
             // 
-            this.txtFeedback.Location = new System.Drawing.Point(195, 88);
+            this.txtFeedback.Location = new System.Drawing.Point(199, 88);
             this.txtFeedback.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFeedback.Multiline = true;
             this.txtFeedback.Name = "txtFeedback";
@@ -43,10 +43,10 @@
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(267, 251);
+            this.btnSubmit.Location = new System.Drawing.Point(257, 248);
             this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(56, 19);
+            this.btnSubmit.Size = new System.Drawing.Size(104, 19);
             this.btnSubmit.TabIndex = 1;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;

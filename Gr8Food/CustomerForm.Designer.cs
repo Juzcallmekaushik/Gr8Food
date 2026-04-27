@@ -48,7 +48,7 @@
             // 
             this.lstMenu.FormattingEnabled = true;
             this.lstMenu.Location = new System.Drawing.Point(9, 63);
-            this.lstMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstMenu.Margin = new System.Windows.Forms.Padding(2);
             this.lstMenu.Name = "lstMenu";
             this.lstMenu.Size = new System.Drawing.Size(286, 212);
             this.lstMenu.TabIndex = 0;
@@ -57,7 +57,7 @@
             // 
             this.lstOrders.FormattingEnabled = true;
             this.lstOrders.Location = new System.Drawing.Point(314, 63);
-            this.lstOrders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstOrders.Margin = new System.Windows.Forms.Padding(2);
             this.lstOrders.Name = "lstOrders";
             this.lstOrders.Size = new System.Drawing.Size(258, 147);
             this.lstOrders.TabIndex = 1;
@@ -65,7 +65,7 @@
             // btnOrder
             // 
             this.btnOrder.Location = new System.Drawing.Point(9, 283);
-            this.btnOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnOrder.Margin = new System.Windows.Forms.Padding(2);
             this.btnOrder.Name = "btnOrder";
             this.btnOrder.Size = new System.Drawing.Size(56, 19);
             this.btnOrder.TabIndex = 2;
@@ -76,7 +76,7 @@
             // btnCancelOrder
             // 
             this.btnCancelOrder.Location = new System.Drawing.Point(314, 227);
-            this.btnCancelOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancelOrder.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancelOrder.Name = "btnCancelOrder";
             this.btnCancelOrder.Size = new System.Drawing.Size(80, 19);
             this.btnCancelOrder.TabIndex = 3;
@@ -87,7 +87,7 @@
             // btnFeedback
             // 
             this.btnFeedback.Location = new System.Drawing.Point(492, 227);
-            this.btnFeedback.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFeedback.Margin = new System.Windows.Forms.Padding(2);
             this.btnFeedback.Name = "btnFeedback";
             this.btnFeedback.Size = new System.Drawing.Size(80, 19);
             this.btnFeedback.TabIndex = 4;
@@ -98,7 +98,7 @@
             // btnTopUp
             // 
             this.btnTopUp.Location = new System.Drawing.Point(239, 342);
-            this.btnTopUp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTopUp.Margin = new System.Windows.Forms.Padding(2);
             this.btnTopUp.Name = "btnTopUp";
             this.btnTopUp.Size = new System.Drawing.Size(56, 24);
             this.btnTopUp.TabIndex = 7;
@@ -119,7 +119,7 @@
             // txtTopUpAmount
             // 
             this.txtTopUpAmount.Location = new System.Drawing.Point(199, 313);
-            this.txtTopUpAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTopUpAmount.Margin = new System.Windows.Forms.Padding(2);
             this.txtTopUpAmount.Name = "txtTopUpAmount";
             this.txtTopUpAmount.Size = new System.Drawing.Size(96, 20);
             this.txtTopUpAmount.TabIndex = 9;
@@ -128,7 +128,7 @@
             // 
             this.lstFeedback.FormattingEnabled = true;
             this.lstFeedback.Location = new System.Drawing.Point(314, 258);
-            this.lstFeedback.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstFeedback.Margin = new System.Windows.Forms.Padding(2);
             this.lstFeedback.Name = "lstFeedback";
             this.lstFeedback.Size = new System.Drawing.Size(258, 108);
             this.lstFeedback.TabIndex = 10;
@@ -147,7 +147,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(319, 37);
+            this.label2.Location = new System.Drawing.Point(311, 37);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
@@ -205,7 +205,7 @@
             this.Controls.Add(this.btnOrder);
             this.Controls.Add(this.lstOrders);
             this.Controls.Add(this.lstMenu);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CustomerForm";
             this.Text = "CustomerForm";
             this.ResumeLayout(false);

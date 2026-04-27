@@ -48,10 +48,10 @@
             // lstMenu
             // 
             this.lstMenu.FormattingEnabled = true;
-            this.lstMenu.Location = new System.Drawing.Point(266, 43);
-            this.lstMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstMenu.Location = new System.Drawing.Point(273, 43);
+            this.lstMenu.Margin = new System.Windows.Forms.Padding(2);
             this.lstMenu.Name = "lstMenu";
-            this.lstMenu.Size = new System.Drawing.Size(216, 199);
+            this.lstMenu.Size = new System.Drawing.Size(211, 186);
             this.lstMenu.TabIndex = 0;
             this.lstMenu.Click += new System.EventHandler(this.lstMenu_SelectedIndexChanged);
             this.lstMenu.SelectedIndexChanged += new System.EventHandler(this.lstMenu_SelectedIndexChanged);
@@ -60,7 +60,7 @@
             // 
             this.lstOrders.FormattingEnabled = true;
             this.lstOrders.Location = new System.Drawing.Point(9, 43);
-            this.lstOrders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstOrders.Margin = new System.Windows.Forms.Padding(2);
             this.lstOrders.Name = "lstOrders";
             this.lstOrders.Size = new System.Drawing.Size(253, 251);
             this.lstOrders.TabIndex = 1;
@@ -68,7 +68,7 @@
             // btnAddMenu
             // 
             this.btnAddMenu.Location = new System.Drawing.Point(521, 84);
-            this.btnAddMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddMenu.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddMenu.Name = "btnAddMenu";
             this.btnAddMenu.Size = new System.Drawing.Size(80, 19);
             this.btnAddMenu.TabIndex = 2;
@@ -79,7 +79,7 @@
             // btnMarkProgress
             // 
             this.btnMarkProgress.Location = new System.Drawing.Point(9, 304);
-            this.btnMarkProgress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMarkProgress.Margin = new System.Windows.Forms.Padding(2);
             this.btnMarkProgress.Name = "btnMarkProgress";
             this.btnMarkProgress.Size = new System.Drawing.Size(101, 24);
             this.btnMarkProgress.TabIndex = 3;
@@ -90,7 +90,7 @@
             // btnMarkComplete
             // 
             this.btnMarkComplete.Location = new System.Drawing.Point(161, 304);
-            this.btnMarkComplete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMarkComplete.Margin = new System.Windows.Forms.Padding(2);
             this.btnMarkComplete.Name = "btnMarkComplete";
             this.btnMarkComplete.Size = new System.Drawing.Size(101, 24);
             this.btnMarkComplete.TabIndex = 4;
@@ -101,7 +101,7 @@
             // btnEditMenu
             // 
             this.btnEditMenu.Location = new System.Drawing.Point(521, 118);
-            this.btnEditMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEditMenu.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditMenu.Name = "btnEditMenu";
             this.btnEditMenu.Size = new System.Drawing.Size(80, 19);
             this.btnEditMenu.TabIndex = 5;
@@ -112,7 +112,7 @@
             // btnDeleteMenu
             // 
             this.btnDeleteMenu.Location = new System.Drawing.Point(521, 152);
-            this.btnDeleteMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDeleteMenu.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteMenu.Name = "btnDeleteMenu";
             this.btnDeleteMenu.Size = new System.Drawing.Size(80, 19);
             this.btnDeleteMenu.TabIndex = 6;
@@ -124,7 +124,7 @@
             // 
             this.chkAvailable.AutoSize = true;
             this.chkAvailable.Location = new System.Drawing.Point(532, 190);
-            this.chkAvailable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAvailable.Margin = new System.Windows.Forms.Padding(2);
             this.chkAvailable.Name = "chkAvailable";
             this.chkAvailable.Size = new System.Drawing.Size(69, 17);
             this.chkAvailable.TabIndex = 7;
@@ -136,23 +136,23 @@
             // 
             this.cmbCategory.FormattingEnabled = true;
             this.cmbCategory.Location = new System.Drawing.Point(509, 221);
-            this.cmbCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(92, 21);
             this.cmbCategory.TabIndex = 9;
             // 
             // txtMenuName
             // 
-            this.txtMenuName.Location = new System.Drawing.Point(375, 255);
-            this.txtMenuName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMenuName.Location = new System.Drawing.Point(375, 246);
+            this.txtMenuName.Margin = new System.Windows.Forms.Padding(2);
             this.txtMenuName.Name = "txtMenuName";
             this.txtMenuName.Size = new System.Drawing.Size(76, 20);
             this.txtMenuName.TabIndex = 10;
             // 
             // txtPrice
             // 
-            this.txtPrice.Location = new System.Drawing.Point(309, 281);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPrice.Location = new System.Drawing.Point(309, 274);
+            this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(76, 20);
             this.txtPrice.TabIndex = 11;
@@ -161,7 +161,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(270, 262);
+            this.label1.Location = new System.Drawing.Point(270, 253);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 13);
@@ -172,7 +172,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(271, 288);
+            this.label2.Location = new System.Drawing.Point(271, 281);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
@@ -222,7 +222,7 @@
             this.Controls.Add(this.btnAddMenu);
             this.Controls.Add(this.lstOrders);
             this.Controls.Add(this.lstMenu);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ChefForm";
             this.Text = "ChefForm";
             this.ResumeLayout(false);
