@@ -34,17 +34,19 @@
             // 
             // txtFeedback
             // 
-            this.txtFeedback.Location = new System.Drawing.Point(258, 69);
+            this.txtFeedback.Location = new System.Drawing.Point(195, 88);
+            this.txtFeedback.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFeedback.Multiline = true;
             this.txtFeedback.Name = "txtFeedback";
-            this.txtFeedback.Size = new System.Drawing.Size(281, 168);
+            this.txtFeedback.Size = new System.Drawing.Size(212, 137);
             this.txtFeedback.TabIndex = 0;
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(333, 282);
+            this.btnSubmit.Location = new System.Drawing.Point(277, 249);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(75, 23);
+            this.btnSubmit.Size = new System.Drawing.Size(56, 19);
             this.btnSubmit.TabIndex = 1;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -52,11 +54,12 @@
             // 
             // FeedbackForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.txtFeedback);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FeedbackForm";
             this.Text = "FeedbackForm";
             this.ResumeLayout(false);
