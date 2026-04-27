@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="MenuItem.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="PasswordUtility.cs" />
     <Compile Include="ProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>

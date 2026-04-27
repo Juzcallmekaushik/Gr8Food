@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,6 +15,18 @@ namespace Gr8Food
         private static readonly Color Danger = Color.FromArgb(181, 64, 64);
         private static readonly Color Text = Color.FromArgb(43, 43, 43);
         private static readonly Color Muted = Color.FromArgb(102, 102, 102);
+
+        public static bool IsInDesignMode(Control control)
+        {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                return true;
+            }
+
+            return control != null
+                && control.Site != null
+                && control.Site.DesignMode;
+        }
 
         public static void ApplyTheme(Form form, string title, string subtitle)
         {

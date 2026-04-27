@@ -21,8 +21,8 @@ namespace Gr8Food
 
             txtUsername.Text = AppSession.CurrentUser.Username;
             txtFullName.Text = AppSession.CurrentUser.FullName;
-            txtPassword.Text = AppSession.CurrentUser.Password;
-            txtConfirmPassword.Text = AppSession.CurrentUser.Password;
+            txtPassword.Clear();
+            txtConfirmPassword.Clear();
             lblRole.Text = string.Format("Role: {0}", AppSession.CurrentUser.Role);
         }
 

@@ -16,21 +16,14 @@ namespace Gr8Food
             dtFilter.CustomFormat = "MMMM yyyy";
             dtFilter.ShowUpDown = true;
             lstFeedback.SelectedIndexChanged += lstFeedback_SelectedIndexChanged;
-            AddProfileButton();
             UIStyler.ApplyTheme(this, "Manager Dashboard", "Respond to feedback and review customer wallet activity.");
-            Setup();
-        }
 
-        private void AddProfileButton()
-        {
-            Button btnProfile = new Button();
-            btnProfile.Name = "btnProfile";
-            btnProfile.Text = "Profile";
-            btnProfile.Size = new System.Drawing.Size(75, 23);
-            btnProfile.Location = new System.Drawing.Point(611, 33);
-            btnProfile.Click += btnProfile_Click;
-            Controls.Add(btnProfile);
-            btnProfile.BringToFront();
+            if (UIStyler.IsInDesignMode(this))
+            {
+                return;
+            }
+
+            Setup();
         }
 
         private void Setup()

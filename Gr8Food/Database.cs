@@ -23,6 +23,7 @@ namespace Gr8Food
             CreateTablesIfNeeded();
             ApplySchemaUpgrades();
             SeedDataIfNeeded();
+            UpgradePlaintextPasswords();
         }
 
         private static void CreateDatabaseIfNeeded()
@@ -53,7 +54,8 @@ BEGIN
         FullName NVARCHAR(100) NOT NULL,
         [Password] NVARCHAR(50) NOT NULL,
         [Role] NVARCHAR(20) NOT NULL,
-        WalletBalance DECIMAL(10,2) NOT NULL DEFAULT(100.00)
+        WalletBalance DECIMAL(10,2) NOT NULL DEFAULT(100.00),
+        IsDeleted BIT NOT NULL DEFAULT(0)
     );
 END;
 
@@ -143,6 +145,12 @@ IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Users_Wallet
 BEGIN
     ALTER TABLE dbo.Users
     ADD CONSTRAINT CK_Users_WalletBalance CHECK (WalletBalance >= 0);
+END;
+
+IF COL_LENGTH('dbo.Users', 'IsDeleted') IS NULL
+BEGIN
+    ALTER TABLE dbo.Users
+    ADD IsDeleted BIT NOT NULL CONSTRAINT DF_Users_IsDeleted DEFAULT(0);
 END;
 
 IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_MenuItems_Category')
@@ -286,6 +294,51 @@ END;";
             {
                 connection.Open();
                 command.ExecuteNonQuery();
+            }
+        }
+
+        private static void UpgradePlaintextPasswords()
+        {
+            const string selectSql = @"
+SELECT UserId, [Password]
+FROM dbo.Users
+WHERE IsDeleted = 0;";
+
+            using (SqlConnection connection = CreateConnection())
+            using (SqlCommand command = new SqlCommand(selectSql, connection))
+            {
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    System.Collections.Generic.List<System.Tuple<int, string>> updates =
+                        new System.Collections.Generic.List<System.Tuple<int, string>>();
+
+                    while (reader.Read())
+                    {
+                        int userId = Convert.ToInt32(reader["UserId"]);
+                        string storedPassword = Convert.ToString(reader["Password"]);
+
+                        if (!PasswordUtility.IsHashedPassword(storedPassword))
+                        {
+                            updates.Add(System.Tuple.Create(userId, PasswordUtility.HashPassword(storedPassword)));
+                        }
+                    }
+
+                    reader.Close();
+
+                    foreach (System.Tuple<int, string> update in updates)
+                    {
+                        using (SqlCommand updateCommand = new SqlCommand(
+                            "UPDATE dbo.Users SET [Password] = @Password WHERE UserId = @UserId;",
+                            connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@Password", update.Item2);
+                            updateCommand.Parameters.AddWithValue("@UserId", update.Item1);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                    }
+                }
             }
         }
     }

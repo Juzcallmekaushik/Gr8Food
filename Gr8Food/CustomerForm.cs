@@ -15,21 +15,15 @@ namespace Gr8Food
             InitializeComponent();
             Text = "Customer Dashboard";
             txtTopUpAmount.KeyPress += txtTopUpAmount_KeyPress;
-            AddProfileButton();
             UIStyler.ApplyTheme(this, "Customer Dashboard", "Browse the menu, track orders, and manage your wallet.");
-            Setup();
-        }
 
-        private void AddProfileButton()
-        {
-            Button btnProfile = new Button();
-            btnProfile.Name = "btnProfile";
-            btnProfile.Text = "Profile";
-            btnProfile.Size = new System.Drawing.Size(75, 30);
-            btnProfile.Location = new System.Drawing.Point(632, 12);
-            btnProfile.Click += btnProfile_Click;
-            Controls.Add(btnProfile);
-            btnProfile.BringToFront();
+            if (UIStyler.IsInDesignMode(this))
+            {
+                lblWallet.Text = "Customer Name\r\nWallet Balance: RM 0.00";
+                return;
+            }
+
+            Setup();
         }
 
         private void Setup()
@@ -65,7 +59,7 @@ namespace Gr8Food
         {
             AppSession.CurrentUser = AppRepository.GetUserById(AppSession.CurrentUser.UserId);
             lblWallet.Text = string.Format(
-                "{0} | Wallet Balance: RM {1:0.00}",
+                "{0}\nWallet Balance: RM {1:0.00}",
                 AppSession.CurrentUser.FullName,
                 AppSession.CurrentUser.WalletBalance);
         }
@@ -181,10 +175,7 @@ namespace Gr8Food
         {
             using (ProfileForm profileForm = new ProfileForm())
             {
-                if (profileForm.ShowDialog(this) == DialogResult.OK)
-                {
-                    UpdateWallet();
-                }
+                profileForm.ShowDialog(this);
             }
         }
 

@@ -16,10 +16,11 @@ BEGIN
         FullName NVARCHAR(100) NOT NULL,
         [Password] NVARCHAR(50) NOT NULL,
         [Role] NVARCHAR(20) NOT NULL,
-        WalletBalance DECIMAL(10,2) NOT NULL DEFAULT(100.00)
+        WalletBalance DECIMAL(10,2) NOT NULL DEFAULT(100.00),
+        IsDeleted BIT NOT NULL DEFAULT(0)
     );
-END;
-GO
+  END;
+  GO
 
 IF OBJECT_ID('dbo.MenuItems', 'U') IS NULL
 BEGIN

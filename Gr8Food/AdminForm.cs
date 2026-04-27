@@ -143,7 +143,7 @@ namespace Gr8Food
                 return;
             }
 
-            MessageBox.Show("User deleted successfully.");
+            MessageBox.Show("User removed successfully.");
             RefreshData();
         }
 
@@ -198,7 +198,7 @@ namespace Gr8Food
 
             txtEditUsername.Text = user.Username;
             txtEditFullName.Text = user.FullName;
-            txtEditPassword.Text = user.Password;
+            txtEditPassword.Clear();
             cmbEditRole.SelectedItem = user.Role;
         }
 

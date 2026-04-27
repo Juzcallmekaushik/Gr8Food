@@ -13,21 +13,14 @@ namespace Gr8Food
         {
             InitializeComponent();
             Text = "Chef Dashboard";
-            AddProfileButton();
             UIStyler.ApplyTheme(this, "Chef Dashboard", "Manage menu items and keep customer orders moving.");
-            Setup();
-        }
 
-        private void AddProfileButton()
-        {
-            Button btnProfile = new Button();
-            btnProfile.Name = "btnProfile";
-            btnProfile.Text = "Profile";
-            btnProfile.Size = new System.Drawing.Size(75, 23);
-            btnProfile.Location = new System.Drawing.Point(608, 28);
-            btnProfile.Click += btnProfile_Click;
-            Controls.Add(btnProfile);
-            btnProfile.BringToFront();
+            if (UIStyler.IsInDesignMode(this))
+            {
+                return;
+            }
+
+            Setup();
         }
 
         private void Setup()
@@ -190,6 +183,26 @@ namespace Gr8Food
             {
                 profileForm.ShowDialog(this);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkAvailable_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

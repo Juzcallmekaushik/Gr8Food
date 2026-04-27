@@ -32,21 +32,42 @@ namespace Gr8Food
     {
         public static User Authenticate(string username, string password)
         {
+            username = InputValidator.ValidateUsername(username);
+            password = InputValidator.ValidatePassword(password);
+
             const string sql = @"
 SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
 FROM dbo.Users
-WHERE Username = @Username AND [Password] = @Password;";
+WHERE Username = @Username AND IsDeleted = 0;";
 
             using (SqlConnection connection = Database.CreateConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Username", username);
-                command.Parameters.AddWithValue("@Password", password);
                 connection.Open();
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    return reader.Read() ? MapUser(reader) : null;
+                    if (!reader.Read())
+                    {
+                        return null;
+                    }
+
+                    int userId = Convert.ToInt32(reader["UserId"]);
+                    string storedPassword = Convert.ToString(reader["Password"]);
+                    if (!PasswordUtility.VerifyPassword(password, storedPassword))
+                    {
+                        return null;
+                    }
+
+                    reader.Close();
+
+                    if (!PasswordUtility.IsHashedPassword(storedPassword))
+                    {
+                        UpdateStoredPassword(userId, PasswordUtility.HashPassword(password));
+                    }
+
+                    return GetUserById(userId);
                 }
             }
         }
@@ -56,7 +77,7 @@ WHERE Username = @Username AND [Password] = @Password;";
             const string sql = @"
 SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
 FROM dbo.Users
-WHERE UserId = @UserId;";
+WHERE UserId = @UserId AND IsDeleted = 0;";
 
             using (SqlConnection connection = Database.CreateConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
@@ -76,6 +97,7 @@ WHERE UserId = @UserId;";
             const string sql = @"
 SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
 FROM dbo.Users
+WHERE IsDeleted = 0
 ORDER BY [Role], Username;";
 
             List<User> users = new List<User>();
@@ -102,6 +124,7 @@ ORDER BY [Role], Username;";
 SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
 FROM dbo.Users
 WHERE [Role] = @Role
+  AND IsDeleted = 0
 ORDER BY Username;";
 
             List<User> users = new List<User>();
@@ -139,7 +162,7 @@ VALUES (@Username, @FullName, @Password, @Role, 100.00);";
             {
                 command.Parameters.AddWithValue("@Username", username);
                 command.Parameters.AddWithValue("@FullName", fullName);
-                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@Password", PasswordUtility.HashPassword(password));
                 command.Parameters.AddWithValue("@Role", role);
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -166,7 +189,7 @@ WHERE UserId = @UserId;";
             {
                 command.Parameters.AddWithValue("@Username", username);
                 command.Parameters.AddWithValue("@FullName", fullName);
-                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@Password", PasswordUtility.HashPassword(password));
                 command.Parameters.AddWithValue("@Role", role);
                 command.Parameters.AddWithValue("@UserId", userId);
                 connection.Open();
@@ -180,6 +203,7 @@ WHERE UserId = @UserId;";
 SELECT COUNT(1)
 FROM dbo.Users
 WHERE Username = @Username
+  AND IsDeleted = 0
   AND (@ExcludeUserId IS NULL OR UserId <> @ExcludeUserId);";
 
             using (SqlConnection connection = Database.CreateConnection())
@@ -201,8 +225,8 @@ WHERE Username = @Username
                 GetRecordCount("SELECT COUNT(1) FROM dbo.WalletTransactions WHERE CustomerUserId = @UserId;", userId) > 0 ||
                 GetRecordCount("SELECT COUNT(1) FROM dbo.Feedbacks WHERE CustomerUserId = @UserId;", userId) > 0)
             {
-                reason = "This user cannot be deleted because linked menu, order, wallet, or feedback records already exist.";
-                return false;
+                ArchiveUser(userId);
+                return true;
             }
 
             using (SqlConnection connection = Database.CreateConnection())
@@ -214,6 +238,25 @@ WHERE Username = @Username
             }
 
             return true;
+        }
+
+        private static void ArchiveUser(int userId)
+        {
+            const string sql = @"
+UPDATE dbo.Users
+SET Username = CONCAT('arch_', UserId),
+    [Password] = CONCAT('ARCHIVED$', UserId),
+    IsDeleted = 1
+WHERE UserId = @UserId
+  AND IsDeleted = 0;";
+
+            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@UserId", userId);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
 
         public static User UpdateOwnProfile(int userId, string username, string fullName, string password)
@@ -234,7 +277,7 @@ WHERE UserId = @UserId;";
             {
                 command.Parameters.AddWithValue("@Username", username);
                 command.Parameters.AddWithValue("@FullName", fullName);
-                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@Password", PasswordUtility.HashPassword(password));
                 command.Parameters.AddWithValue("@UserId", userId);
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -864,6 +907,20 @@ WHERE FeedbackId = @FeedbackId;", connection))
             }
         }
 
+        private static void UpdateStoredPassword(int userId, string hashedPassword)
+        {
+            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlCommand command = new SqlCommand(
+                "UPDATE dbo.Users SET [Password] = @Password WHERE UserId = @UserId;",
+                connection))
+            {
+                command.Parameters.AddWithValue("@Password", hashedPassword);
+                command.Parameters.AddWithValue("@UserId", userId);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
         private static User MapUser(SqlDataReader reader)
         {
             return new User
@@ -871,7 +928,7 @@ WHERE FeedbackId = @FeedbackId;", connection))
                 UserId = Convert.ToInt32(reader["UserId"]),
                 Username = Convert.ToString(reader["Username"]),
                 FullName = Convert.ToString(reader["FullName"]),
-                Password = Convert.ToString(reader["Password"]),
+                Password = string.Empty,
                 Role = Convert.ToString(reader["Role"]),
                 WalletBalance = Convert.ToDecimal(reader["WalletBalance"])
             };
