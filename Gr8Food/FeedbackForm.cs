@@ -14,7 +14,8 @@ namespace Gr8Food
             _orderId = orderId;
             _itemName = itemName;
             Text = "Send Feedback";
-            UIStyler.ApplyTheme(this, "Send Feedback", "Share your dining experience for the completed order.");
+            lblOrderItem.Text = string.Format("Order: {0}", _itemName);
+            UIStyler.ApplyPageTheme(this, UIStyler.FeedbackTheme);
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -37,6 +38,11 @@ namespace Gr8Food
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

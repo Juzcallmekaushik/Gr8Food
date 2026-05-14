@@ -286,7 +286,7 @@ WHERE UserId = @UserId;";
             return GetUserById(userId);
         }
 
-        public static List<SalesReportItem> GetSalesReport(int month, int year, int? chefUserId, string category)
+        public static List<SalesReportItem> GetSalesReport(int? month, int? year, int? chefUserId, string category)
         {
             if (!string.Equals(category, DomainRules.CategoryAll, StringComparison.OrdinalIgnoreCase))
             {
@@ -296,8 +296,8 @@ WHERE UserId = @UserId;";
             const string sql = @"
 SELECT OrderId, ItemName, Category, ChefName, CustomerName, Price, [Status], OrderDate
 FROM dbo.Orders
-WHERE MONTH(OrderDate) = @Month
-  AND YEAR(OrderDate) = @Year
+WHERE (@Month IS NULL OR MONTH(OrderDate) = @Month)
+  AND (@Year IS NULL OR YEAR(OrderDate) = @Year)
   AND (@ChefUserId IS NULL OR ChefUserId = @ChefUserId)
   AND (@Category = 'All' OR Category = @Category)
   AND [Status] <> 'Cancelled'
@@ -308,8 +308,8 @@ ORDER BY OrderDate DESC;";
             using (SqlConnection connection = Database.CreateConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
-                command.Parameters.AddWithValue("@Month", month);
-                command.Parameters.AddWithValue("@Year", year);
+                command.Parameters.AddWithValue("@Month", (object)month ?? DBNull.Value);
+                command.Parameters.AddWithValue("@Year", (object)year ?? DBNull.Value);
                 command.Parameters.AddWithValue("@ChefUserId", (object)chefUserId ?? DBNull.Value);
                 command.Parameters.AddWithValue("@Category", category);
                 connection.Open();

@@ -19,13 +19,14 @@ namespace Gr8Food
             this.lblFullName = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblConfirm = new System.Windows.Forms.Label();
+            this.lblRole = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtFullName = new System.Windows.Forms.TextBox();
+            this.txtRole = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
+            this.txtConfirm = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblRole = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblUsername
@@ -42,14 +43,14 @@ namespace Gr8Food
             this.lblFullName.AutoSize = true;
             this.lblFullName.Location = new System.Drawing.Point(38, 86);
             this.lblFullName.Name = "lblFullName";
-            this.lblFullName.Size = new System.Drawing.Size(67, 16);
+            this.lblFullName.Size = new System.Drawing.Size(68, 16);
             this.lblFullName.TabIndex = 1;
             this.lblFullName.Text = "Full Name";
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(38, 129);
+            this.lblPassword.Location = new System.Drawing.Point(38, 172);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(67, 16);
             this.lblPassword.TabIndex = 2;
@@ -58,11 +59,20 @@ namespace Gr8Food
             // lblConfirm
             // 
             this.lblConfirm.AutoSize = true;
-            this.lblConfirm.Location = new System.Drawing.Point(38, 172);
+            this.lblConfirm.Location = new System.Drawing.Point(38, 215);
             this.lblConfirm.Name = "lblConfirm";
-            this.lblConfirm.Size = new System.Drawing.Size(113, 16);
+            this.lblConfirm.Size = new System.Drawing.Size(115, 16);
             this.lblConfirm.TabIndex = 3;
             this.lblConfirm.Text = "Confirm Password";
+            // 
+            // lblRole
+            // 
+            this.lblRole.AutoSize = true;
+            this.lblRole.Location = new System.Drawing.Point(38, 129);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(36, 16);
+            this.lblRole.TabIndex = 10;
+            this.lblRole.Text = "Role";
             // 
             // txtUsername
             // 
@@ -78,61 +88,62 @@ namespace Gr8Food
             this.txtFullName.Size = new System.Drawing.Size(183, 22);
             this.txtFullName.TabIndex = 5;
             // 
+            // txtRole
+            // 
+            this.txtRole.Location = new System.Drawing.Point(173, 126);
+            this.txtRole.Name = "txtRole";
+            this.txtRole.ReadOnly = true;
+            this.txtRole.Size = new System.Drawing.Size(183, 22);
+            this.txtRole.TabIndex = 6;
+            this.txtRole.TabStop = false;
+            // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(173, 126);
+            this.txtPassword.Location = new System.Drawing.Point(173, 169);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(183, 22);
-            this.txtPassword.TabIndex = 6;
+            this.txtPassword.TabIndex = 7;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
-            // txtConfirmPassword
+            // txtConfirm
             // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(173, 169);
-            this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.Size = new System.Drawing.Size(183, 22);
-            this.txtConfirmPassword.TabIndex = 7;
-            this.txtConfirmPassword.UseSystemPasswordChar = true;
+            this.txtConfirm.Location = new System.Drawing.Point(173, 212);
+            this.txtConfirm.Name = "txtConfirm";
+            this.txtConfirm.Size = new System.Drawing.Size(183, 22);
+            this.txtConfirm.TabIndex = 8;
+            this.txtConfirm.UseSystemPasswordChar = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(173, 221);
+            this.btnSave.Location = new System.Drawing.Point(173, 264);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(85, 29);
-            this.btnSave.TabIndex = 8;
+            this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(271, 221);
+            this.btnCancel.Location = new System.Drawing.Point(271, 264);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(85, 29);
-            this.btnCancel.TabIndex = 9;
+            this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // lblRole
-            // 
-            this.lblRole.AutoSize = true;
-            this.lblRole.Location = new System.Drawing.Point(38, 15);
-            this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(41, 16);
-            this.lblRole.TabIndex = 10;
-            this.lblRole.Text = "Role: ";
             // 
             // ProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 280);
+            this.ClientSize = new System.Drawing.Size(406, 323);
             this.Controls.Add(this.lblRole);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.txtConfirmPassword);
+            this.Controls.Add(this.txtConfirm);
             this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.txtRole);
             this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.lblConfirm);
@@ -148,18 +159,20 @@ namespace Gr8Food
             this.Load += new System.EventHandler(this.ProfileForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblFullName;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblConfirm;
+        private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.TextBox txtRole;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox txtConfirmPassword;
+        private System.Windows.Forms.TextBox txtConfirm;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label lblRole;
     }
 }

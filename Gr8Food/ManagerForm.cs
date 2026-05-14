@@ -12,11 +12,11 @@ namespace Gr8Food
         {
             InitializeComponent();
             Text = "Manager Dashboard";
-            dtFilter.Format = DateTimePickerFormat.Custom;
-            dtFilter.CustomFormat = "MMMM yyyy";
-            dtFilter.ShowUpDown = true;
+            dtpWalletFilter.Format = DateTimePickerFormat.Custom;
+            dtpWalletFilter.CustomFormat = "MMMM yyyy";
+            dtpWalletFilter.ShowUpDown = true;
             lstFeedback.SelectedIndexChanged += lstFeedback_SelectedIndexChanged;
-            UIStyler.ApplyTheme(this, "Manager Dashboard", "Respond to feedback and review customer wallet activity.");
+            UIStyler.ApplyPageTheme(this, UIStyler.ManagerTheme);
 
             if (UIStyler.IsInDesignMode(this))
             {
@@ -63,7 +63,7 @@ namespace Gr8Food
             }
 
             lstWallet.DataSource = null;
-            lstWallet.DataSource = AppRepository.GetWalletTransactions(customerUserId, dtFilter.Value.Month, dtFilter.Value.Year);
+            lstWallet.DataSource = AppRepository.GetWalletTransactions(customerUserId, dtpWalletFilter.Value.Month, dtpWalletFilter.Value.Year);
         }
 
         private void btnReply_Click(object sender, EventArgs e)

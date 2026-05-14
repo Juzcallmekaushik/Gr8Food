@@ -13,7 +13,7 @@ namespace Gr8Food
         {
             InitializeComponent();
             Text = "Chef Dashboard";
-            UIStyler.ApplyTheme(this, "Chef Dashboard", "Manage menu items and keep customer orders moving.");
+            UIStyler.ApplyPageTheme(this, UIStyler.ChefTheme);
 
             if (UIStyler.IsInDesignMode(this))
             {
@@ -185,7 +185,7 @@ namespace Gr8Food
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void lblMenuName_Click(object sender, EventArgs e)
         {
 
         }
@@ -195,7 +195,7 @@ namespace Gr8Food
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void lblPrice_Click(object sender, EventArgs e)
         {
 
         }

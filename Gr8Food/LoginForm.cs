@@ -8,14 +8,14 @@ namespace Gr8Food
         public LoginForm()
         {
             InitializeComponent();
-            UIStyler.ApplyTheme(this, "Gr8Food", "Sign in to continue to the restaurant management system.");
+            UIStyler.ApplyPageTheme(this, UIStyler.LoginTheme);
             AcceptButton = btnLogin;
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
             Text = "Gr8Food Management System";
-            lblTitle.Visible = false;
+            lblTitle.Visible = true;
         }
 
         private void btnLogin_Click_1(object sender, EventArgs e)
@@ -74,6 +74,36 @@ namespace Gr8Food
             }
 
             Close();
+        }
+
+        private void picLoginImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPassword_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblUsername_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

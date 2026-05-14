@@ -11,12 +11,12 @@ namespace Gr8Food
         public AdminForm()
         {
             InitializeComponent();
-            UIStyler.ApplyTheme(this, "Admin Dashboard", "Manage users and review the monthly sales activity.");
+            UIStyler.ApplyPageTheme(this, UIStyler.AdminTheme);
             Text = "Admin Dashboard";
             btnViewReport.Click += btnViewReport_Click;
-            dtFilter.Format = DateTimePickerFormat.Custom;
-            dtFilter.CustomFormat = "MMMM yyyy";
-            dtFilter.ShowUpDown = true;
+            dtpReportFilter.Format = DateTimePickerFormat.Custom;
+            dtpReportFilter.CustomFormat = "MMMM yyyy";
+            dtpReportFilter.ShowUpDown = true;
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
@@ -30,14 +30,14 @@ namespace Gr8Food
         {
             LoadUsers();
             LoadChefs();
-            LoadReport();
+            LoadFullReport();
         }
 
         private void LoadRoleOptions()
         {
-            cmbRole.Items.Clear();
-            cmbRole.Items.AddRange(DomainRules.Roles);
-            cmbRole.SelectedItem = DomainRules.RoleCustomer;
+            cmbNewRole.Items.Clear();
+            cmbNewRole.Items.AddRange(DomainRules.Roles);
+            cmbNewRole.SelectedItem = DomainRules.RoleCustomer;
 
             cmbEditRole.Items.Clear();
             cmbEditRole.Items.AddRange(DomainRules.Roles);
@@ -79,26 +79,47 @@ namespace Gr8Food
             }
         }
 
-        private void LoadReport()
+        private void LoadFullReport()
+        {
+            cmbCategory.SelectedIndex = 0;
+            cmbChef.SelectedIndex = 0;
+            LoadReport(false);
+        }
+
+        private void LoadFilteredReport()
+        {
+            LoadReport(true);
+        }
+
+        private void LoadReport(bool applyFilters)
         {
             int? chefUserId = null;
-            User selectedChef = cmbChef.SelectedItem as User;
-            if (selectedChef != null)
+            string category = DomainRules.CategoryAll;
+
+            if (applyFilters)
             {
-                chefUserId = selectedChef.UserId;
+                User selectedChef = cmbChef.SelectedItem as User;
+                if (selectedChef != null)
+                {
+                    chefUserId = selectedChef.UserId;
+                }
+
+                category = cmbCategory.SelectedItem == null ? DomainRules.CategoryAll : cmbCategory.SelectedItem.ToString();
             }
 
-            string category = cmbCategory.SelectedItem == null ? DomainRules.CategoryAll : cmbCategory.SelectedItem.ToString();
             lstReport.DataSource = null;
-            lstReport.DataSource = AppRepository.GetSalesReport(dtFilter.Value.Month, dtFilter.Value.Year, chefUserId, category);
+            int? month = applyFilters ? (int?)dtpReportFilter.Value.Month : null;
+            int? year = applyFilters ? (int?)dtpReportFilter.Value.Year : null;
+
+            lstReport.DataSource = AppRepository.GetSalesReport(month, year, chefUserId, category);
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
             string username = txtNewUsername.Text.Trim();
             string password = txtNewPassword.Text.Trim();
-            string role = Convert.ToString(cmbRole.SelectedItem);
-            string fullName = txtFullName.Text.Trim();
+            string role = Convert.ToString(cmbNewRole.SelectedItem);
+            string fullName = txtNewFullName.Text.Trim();
 
             try
             {
@@ -110,10 +131,10 @@ namespace Gr8Food
 
                 AppRepository.AddUser(username, fullName, password, role);
                 MessageBox.Show("User added successfully.");
-                txtFullName.Clear();
+                txtNewFullName.Clear();
                 txtNewUsername.Clear();
                 txtNewPassword.Clear();
-                cmbRole.SelectedItem = DomainRules.RoleCustomer;
+                cmbNewRole.SelectedItem = DomainRules.RoleCustomer;
                 RefreshData();
             }
             catch (Exception ex)
@@ -180,12 +201,12 @@ namespace Gr8Food
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            LoadReport();
+            LoadFilteredReport();
         }
 
         private void btnViewReport_Click(object sender, EventArgs e)
         {
-            LoadReport();
+            LoadFullReport();
         }
 
         private void lstUsers_SelectedIndexChanged(object sender, EventArgs e)

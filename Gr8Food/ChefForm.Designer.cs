@@ -39,8 +39,8 @@
             this.cmbCategory = new System.Windows.Forms.ComboBox();
             this.txtMenuName = new System.Windows.Forms.TextBox();
             this.txtPrice = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblMenuName = new System.Windows.Forms.Label();
+            this.lblPrice = new System.Windows.Forms.Label();
             this.btnProfile = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -158,27 +158,27 @@
             this.txtPrice.TabIndex = 11;
             this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             // 
-            // label1
+            // lblMenuName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(270, 253);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Food /Drinks name:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblMenuName.AutoSize = true;
+            this.lblMenuName.Location = new System.Drawing.Point(270, 253);
+            this.lblMenuName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMenuName.Name = "lblMenuName";
+            this.lblMenuName.Size = new System.Drawing.Size(101, 13);
+            this.lblMenuName.TabIndex = 12;
+            this.lblMenuName.Text = "Food /Drinks name:";
+            this.lblMenuName.Click += new System.EventHandler(this.lblMenuName_Click);
             // 
-            // label2
+            // lblPrice
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(271, 281);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Price:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Location = new System.Drawing.Point(271, 281);
+            this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(34, 13);
+            this.lblPrice.TabIndex = 13;
+            this.lblPrice.Text = "Price:";
+            this.lblPrice.Click += new System.EventHandler(this.lblPrice_Click);
             // 
             // btnProfile
             // 
@@ -209,8 +209,8 @@
             this.ClientSize = new System.Drawing.Size(612, 366);
             this.Controls.Add(this.btnProfile);
             this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPrice);
+            this.Controls.Add(this.lblMenuName);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.txtMenuName);
             this.Controls.Add(this.cmbCategory);
@@ -243,8 +243,8 @@
         private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.TextBox txtMenuName;
         private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblMenuName;
+        private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Button btnProfile;
         private System.Windows.Forms.Button btnLogout;
     }

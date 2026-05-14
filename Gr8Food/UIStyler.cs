@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,14 +6,75 @@ namespace Gr8Food
 {
     public static class UIStyler
     {
-        private static readonly Color Background = Color.FromArgb(247, 243, 236);
-        private static readonly Color Surface = Color.FromArgb(255, 252, 248);
-        private static readonly Color Header = Color.FromArgb(38, 70, 55);
-        private static readonly Color Accent = Color.FromArgb(230, 111, 81);
-        private static readonly Color AccentAlt = Color.FromArgb(42, 157, 143);
         private static readonly Color Danger = Color.FromArgb(181, 64, 64);
-        private static readonly Color Text = Color.FromArgb(43, 43, 43);
-        private static readonly Color Muted = Color.FromArgb(102, 102, 102);
+        private static readonly Color DefaultText = Color.FromArgb(43, 43, 43);
+
+        public sealed class PageTheme
+        {
+            public Color Background { get; private set; }
+            public Color Surface { get; private set; }
+            public Color Primary { get; private set; }
+            public Color Secondary { get; private set; }
+            public Color Text { get; private set; }
+            public Color ButtonText { get; private set; }
+
+            private PageTheme(Color background, Color surface, Color primary, Color secondary, Color text, Color buttonText)
+            {
+                Background = background;
+                Surface = surface;
+                Primary = primary;
+                Secondary = secondary;
+                Text = text;
+                ButtonText = buttonText;
+            }
+
+            public static PageTheme Create(Color background, Color surface, Color primary, Color secondary)
+            {
+                return new PageTheme(background, surface, primary, secondary, DefaultText, Color.White);
+            }
+        }
+
+        public static readonly PageTheme LoginTheme = PageTheme.Create(
+            Color.FromArgb(244, 239, 232),
+            Color.FromArgb(255, 252, 248),
+            Color.FromArgb(123, 55, 42),
+            Color.FromArgb(211, 132, 89));
+
+        public static readonly PageTheme AdminTheme = PageTheme.Create(
+            Color.FromArgb(238, 243, 247),
+            Color.FromArgb(250, 253, 255),
+            Color.FromArgb(34, 77, 122),
+            Color.FromArgb(91, 140, 179));
+
+        public static readonly PageTheme CustomerTheme = PageTheme.Create(
+            Color.FromArgb(247, 242, 232),
+            Color.FromArgb(255, 252, 245),
+            Color.FromArgb(174, 86, 42),
+            Color.FromArgb(70, 139, 108));
+
+        public static readonly PageTheme ChefTheme = PageTheme.Create(
+            Color.FromArgb(241, 247, 239),
+            Color.FromArgb(250, 255, 248),
+            Color.FromArgb(47, 108, 76),
+            Color.FromArgb(205, 117, 55));
+
+        public static readonly PageTheme ManagerTheme = PageTheme.Create(
+            Color.FromArgb(242, 240, 248),
+            Color.FromArgb(252, 251, 255),
+            Color.FromArgb(88, 70, 134),
+            Color.FromArgb(73, 139, 160));
+
+        public static readonly PageTheme ProfileTheme = PageTheme.Create(
+            Color.FromArgb(239, 246, 244),
+            Color.FromArgb(250, 255, 254),
+            Color.FromArgb(36, 111, 105),
+            Color.FromArgb(95, 153, 145));
+
+        public static readonly PageTheme FeedbackTheme = PageTheme.Create(
+            Color.FromArgb(250, 243, 238),
+            Color.FromArgb(255, 252, 249),
+            Color.FromArgb(168, 75, 67),
+            Color.FromArgb(221, 132, 95));
 
         public static bool IsInDesignMode(Control control)
         {
@@ -30,69 +90,39 @@ namespace Gr8Food
 
         public static void ApplyTheme(Form form, string title, string subtitle)
         {
-            if (form.Controls.ContainsKey("__appHeader"))
+            ApplyPageTheme(form, LoginTheme);
+        }
+
+        public static void ApplyPageTheme(Form form, PageTheme theme)
+        {
+            if (form == null || theme == null)
             {
                 return;
             }
 
             form.SuspendLayout();
-            form.BackColor = Background;
-            form.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            form.ForeColor = Text;
+            form.BackColor = theme.Background;
+            form.ForeColor = theme.Text;
             form.StartPosition = FormStartPosition.CenterScreen;
-
-            const int headerHeight = 82;
-            List<Control> controls = new List<Control>();
-            foreach (Control control in form.Controls)
-            {
-                controls.Add(control);
-            }
-
-            foreach (Control control in controls)
-            {
-                control.Location = new Point(control.Left, control.Top + headerHeight);
-            }
-
-            form.ClientSize = new Size(form.ClientSize.Width, form.ClientSize.Height + headerHeight);
-
-            Panel headerPanel = new Panel();
-            headerPanel.Name = "__appHeader";
-            headerPanel.Dock = DockStyle.Top;
-            headerPanel.Height = headerHeight;
-            headerPanel.BackColor = Header;
-
-            Label lblTitle = new Label();
-            lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(26, 18);
-            lblTitle.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTitle.ForeColor = Color.White;
-            lblTitle.Text = title;
-
-            Label lblSubtitle = new Label();
-            lblSubtitle.AutoSize = true;
-            lblSubtitle.Location = new Point(29, 50);
-            lblSubtitle.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            lblSubtitle.ForeColor = Color.FromArgb(223, 236, 230);
-            lblSubtitle.Text = subtitle;
-
-            headerPanel.Controls.Add(lblTitle);
-            headerPanel.Controls.Add(lblSubtitle);
-            form.Controls.Add(headerPanel);
-            headerPanel.BringToFront();
-
-            StyleControls(form.Controls);
+            StyleControls(form.Controls, theme);
             form.ResumeLayout();
         }
 
-        private static void StyleControls(Control.ControlCollection controls)
+        public static void ApplyPageAccent(Form form, Control control, PageTheme theme)
+        {
+            if (form == null || control == null || theme == null)
+            {
+                return;
+            }
+
+            control.BackColor = theme.Primary;
+            control.ForeColor = theme.ButtonText;
+        }
+
+        private static void StyleControls(Control.ControlCollection controls, PageTheme theme)
         {
             foreach (Control control in controls)
             {
-                if (control.Name == "__appHeader")
-                {
-                    continue;
-                }
-
                 Button button = control as Button;
                 TextBox textBox = control as TextBox;
                 ListBox listBox = control as ListBox;
@@ -103,13 +133,13 @@ namespace Gr8Food
 
                 if (button != null)
                 {
-                    StyleButton(button);
+                    StyleButton(button, theme);
                 }
                 else if (textBox != null)
                 {
                     textBox.BorderStyle = BorderStyle.FixedSingle;
                     textBox.BackColor = Color.White;
-                    textBox.ForeColor = Text;
+                    textBox.ForeColor = theme.Text;
                     if (textBox.Multiline)
                     {
                         textBox.ScrollBars = ScrollBars.Vertical;
@@ -117,44 +147,43 @@ namespace Gr8Food
                 }
                 else if (listBox != null)
                 {
-                    listBox.BackColor = Surface;
-                    listBox.ForeColor = Text;
+                    listBox.BackColor = theme.Surface;
+                    listBox.ForeColor = theme.Text;
                     listBox.BorderStyle = BorderStyle.FixedSingle;
                     listBox.IntegralHeight = false;
                 }
                 else if (comboBox != null)
                 {
                     comboBox.BackColor = Color.White;
-                    comboBox.ForeColor = Text;
+                    comboBox.ForeColor = theme.Text;
                     comboBox.FlatStyle = FlatStyle.Flat;
                 }
                 else if (dateTimePicker != null)
                 {
                     dateTimePicker.CalendarMonthBackground = Color.White;
-                    dateTimePicker.CalendarForeColor = Text;
+                    dateTimePicker.CalendarForeColor = theme.Text;
                 }
                 else if (checkBox != null)
                 {
-                    checkBox.ForeColor = Text;
+                    checkBox.ForeColor = theme.Text;
                 }
                 else if (label != null)
                 {
-                    label.ForeColor = Text;
-                    label.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+                    label.ForeColor = theme.Text;
                 }
 
                 if (control.HasChildren)
                 {
-                    StyleControls(control.Controls);
+                    StyleControls(control.Controls, theme);
                 }
             }
         }
 
-        private static void StyleButton(Button button)
+        private static void StyleButton(Button button, PageTheme theme)
         {
             string text = button.Text == null ? string.Empty : button.Text.ToLowerInvariant();
-            Color backColor = AccentAlt;
-            Color foreColor = Color.White;
+            Color backColor = theme.Primary;
+            Color foreColor = theme.ButtonText;
 
             if (text.Contains("logout") || text.Contains("cancel"))
             {
@@ -166,11 +195,11 @@ namespace Gr8Food
             }
             else if (text.Contains("filter") || text.Contains("reply"))
             {
-                backColor = Accent;
+                backColor = theme.Secondary;
             }
             else if (text.Contains("profile"))
             {
-                backColor = Color.FromArgb(233, 196, 106);
+                backColor = theme.Surface;
                 foreColor = Color.FromArgb(56, 41, 15);
             }
 
@@ -178,9 +207,7 @@ namespace Gr8Food
             button.FlatAppearance.BorderSize = 0;
             button.BackColor = backColor;
             button.ForeColor = foreColor;
-            button.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button.Cursor = Cursors.Hand;
-            button.Height = button.Height < 32 ? 32 : button.Height;
         }
     }
 }

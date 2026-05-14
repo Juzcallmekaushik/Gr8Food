@@ -32,7 +32,7 @@
             this.txtReply = new System.Windows.Forms.TextBox();
             this.btnReply = new System.Windows.Forms.Button();
             this.cmbCustomer = new System.Windows.Forms.ComboBox();
-            this.dtFilter = new System.Windows.Forms.DateTimePicker();
+            this.dtpWalletFilter = new System.Windows.Forms.DateTimePicker();
             this.lstWallet = new System.Windows.Forms.ListBox();
             this.btnFilterWallet = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
@@ -77,13 +77,13 @@
             this.cmbCustomer.Size = new System.Drawing.Size(270, 21);
             this.cmbCustomer.TabIndex = 3;
             // 
-            // dtFilter
+            // dtpWalletFilter
             // 
-            this.dtFilter.Location = new System.Drawing.Point(302, 94);
-            this.dtFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dtFilter.Name = "dtFilter";
-            this.dtFilter.Size = new System.Drawing.Size(270, 20);
-            this.dtFilter.TabIndex = 4;
+            this.dtpWalletFilter.Location = new System.Drawing.Point(302, 94);
+            this.dtpWalletFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpWalletFilter.Name = "dtpWalletFilter";
+            this.dtpWalletFilter.Size = new System.Drawing.Size(270, 20);
+            this.dtpWalletFilter.TabIndex = 4;
             // 
             // lstWallet
             // 
@@ -136,7 +136,7 @@
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnFilterWallet);
             this.Controls.Add(this.lstWallet);
-            this.Controls.Add(this.dtFilter);
+            this.Controls.Add(this.dtpWalletFilter);
             this.Controls.Add(this.cmbCustomer);
             this.Controls.Add(this.btnReply);
             this.Controls.Add(this.txtReply);
@@ -155,7 +155,7 @@
         private System.Windows.Forms.TextBox txtReply;
         private System.Windows.Forms.Button btnReply;
         private System.Windows.Forms.ComboBox cmbCustomer;
-        private System.Windows.Forms.DateTimePicker dtFilter;
+        private System.Windows.Forms.DateTimePicker dtpWalletFilter;
         private System.Windows.Forms.ListBox lstWallet;
         private System.Windows.Forms.Button btnFilterWallet;
         private System.Windows.Forms.Button btnProfile;

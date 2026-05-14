@@ -15,7 +15,7 @@ namespace Gr8Food
             InitializeComponent();
             Text = "Customer Dashboard";
             txtTopUpAmount.KeyPress += txtTopUpAmount_KeyPress;
-            UIStyler.ApplyTheme(this, "Customer Dashboard", "Browse the menu, track orders, and manage your wallet.");
+            UIStyler.ApplyPageTheme(this, UIStyler.CustomerTheme);
 
             if (UIStyler.IsInDesignMode(this))
             {

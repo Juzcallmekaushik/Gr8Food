@@ -8,7 +8,7 @@ namespace Gr8Food
         public ProfileForm()
         {
             InitializeComponent();
-            UIStyler.ApplyTheme(this, "Update Profile", "Keep your account details accurate and up to date.");
+            UIStyler.ApplyPageTheme(this, UIStyler.ProfileTheme);
         }
 
         private void ProfileForm_Load(object sender, EventArgs e)
@@ -21,9 +21,9 @@ namespace Gr8Food
 
             txtUsername.Text = AppSession.CurrentUser.Username;
             txtFullName.Text = AppSession.CurrentUser.FullName;
+            txtRole.Text = AppSession.CurrentUser.Role;
             txtPassword.Clear();
-            txtConfirmPassword.Clear();
-            lblRole.Text = string.Format("Role: {0}", AppSession.CurrentUser.Role);
+            txtConfirm.Clear();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace Gr8Food
             string username = txtUsername.Text.Trim();
             string fullName = txtFullName.Text.Trim();
             string password = txtPassword.Text.Trim();
-            string confirmPassword = txtConfirmPassword.Text.Trim();
+            string confirmPassword = txtConfirm.Text.Trim();
 
             if (!string.Equals(password, confirmPassword, StringComparison.Ordinal))
             {

@@ -29,10 +29,10 @@ namespace Gr8Food
         private static void CreateDatabaseIfNeeded()
         {
             const string sql = @"
-IF DB_ID('Gr8FoodDb') IS NULL
-BEGIN
-    CREATE DATABASE Gr8FoodDb;
-END";
+                IF DB_ID('Gr8FoodDb') IS NULL
+                BEGIN
+                    CREATE DATABASE Gr8FoodDb;
+                END";
 
             using (SqlConnection connection = new SqlConnection(MasterConnectionString))
             using (SqlCommand command = new SqlCommand(sql, connection))
