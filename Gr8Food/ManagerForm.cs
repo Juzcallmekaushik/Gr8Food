@@ -6,6 +6,7 @@ namespace Gr8Food
 {
     public partial class ManagerForm : Form
     {
+        private readonly AppRepository _repository = new AppRepository();
         private List<Feedback> _feedback = new List<Feedback>();
 
         public ManagerForm()
@@ -35,14 +36,14 @@ namespace Gr8Food
 
         private void LoadFeedback()
         {
-            _feedback = AppRepository.GetAllFeedback();
+            _feedback = _repository.GetAllFeedback();
             lstFeedback.DataSource = null;
             lstFeedback.DataSource = _feedback;
         }
 
         private void LoadCustomers()
         {
-            List<User> customers = AppRepository.GetUsersByRole(DomainRules.RoleCustomer);
+            List<User> customers = _repository.GetUsersByRole(DomainRules.RoleCustomer);
             cmbCustomer.Items.Clear();
             cmbCustomer.Items.Add("All");
             foreach (User customer in customers)
@@ -63,7 +64,7 @@ namespace Gr8Food
             }
 
             lstWallet.DataSource = null;
-            lstWallet.DataSource = AppRepository.GetWalletTransactions(customerUserId, dtpWalletFilter.Value.Month, dtpWalletFilter.Value.Year);
+            lstWallet.DataSource = _repository.GetWalletTransactions(customerUserId, dtpWalletFilter.Value.Month, dtpWalletFilter.Value.Year);
         }
 
         private void btnReply_Click(object sender, EventArgs e)
@@ -97,7 +98,7 @@ namespace Gr8Food
 
             try
             {
-                AppRepository.ReplyToFeedback(feedback.FeedbackId, reply);
+                _repository.ReplyToFeedback(feedback.FeedbackId, reply);
                 MessageBox.Show("Reply sent successfully.");
                 txtReply.Clear();
                 LoadFeedback();

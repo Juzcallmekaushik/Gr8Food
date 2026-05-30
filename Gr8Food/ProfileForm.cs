@@ -5,6 +5,8 @@ namespace Gr8Food
 {
     public partial class ProfileForm : Form
     {
+        private readonly AppRepository _repository = new AppRepository();
+
         public ProfileForm()
         {
             InitializeComponent();
@@ -41,13 +43,13 @@ namespace Gr8Food
 
             try
             {
-                if (AppRepository.UsernameExists(username, AppSession.CurrentUser.UserId))
+                if (_repository.UsernameExists(username, AppSession.CurrentUser.UserId))
                 {
                     MessageBox.Show("That username is already being used by another account.");
                     return;
                 }
 
-                AppSession.CurrentUser = AppRepository.UpdateOwnProfile(
+                AppSession.CurrentUser = _repository.UpdateOwnProfile(
                     AppSession.CurrentUser.UserId,
                     username,
                     fullName,

@@ -6,6 +6,7 @@ namespace Gr8Food
 {
     public partial class CustomerForm : Form
     {
+        private readonly AppRepository _repository = new AppRepository();
         private List<MenuItem> _menuItems = new List<MenuItem>();
         private List<Order> _orders = new List<Order>();
         private List<Feedback> _feedback = new List<Feedback>();
@@ -36,28 +37,28 @@ namespace Gr8Food
 
         private void LoadMenu()
         {
-            _menuItems = AppRepository.GetAvailableMenu();
+            _menuItems = _repository.GetAvailableMenu();
             lstMenu.DataSource = null;
             lstMenu.DataSource = _menuItems;
         }
 
         private void LoadOrders()
         {
-            _orders = AppRepository.GetOrdersForCustomer(AppSession.CurrentUser.UserId);
+            _orders = _repository.GetOrdersForCustomer(AppSession.CurrentUser.UserId);
             lstOrders.DataSource = null;
             lstOrders.DataSource = _orders;
         }
 
         private void LoadFeedback()
         {
-            _feedback = AppRepository.GetFeedbackByCustomer(AppSession.CurrentUser.UserId);
+            _feedback = _repository.GetFeedbackByCustomer(AppSession.CurrentUser.UserId);
             lstFeedback.DataSource = null;
             lstFeedback.DataSource = _feedback;
         }
 
         private void UpdateWallet()
         {
-            AppSession.CurrentUser = AppRepository.GetUserById(AppSession.CurrentUser.UserId);
+            AppSession.CurrentUser = _repository.GetUserById(AppSession.CurrentUser.UserId);
             lblWallet.Text = string.Format(
                 "{0}\nWallet Balance: RM {1:0.00}",
                 AppSession.CurrentUser.FullName,
@@ -74,8 +75,8 @@ namespace Gr8Food
 
             try
             {
-                AppRepository.PlaceOrder(AppSession.CurrentUser.UserId, menuItem.MenuItemId);
-                AppSession.CurrentUser = AppRepository.GetUserById(AppSession.CurrentUser.UserId);
+                _repository.PlaceOrder(AppSession.CurrentUser.UserId, menuItem.MenuItemId);
+                AppSession.CurrentUser = _repository.GetUserById(AppSession.CurrentUser.UserId);
                 MessageBox.Show("Order placed successfully.");
                 Setup();
             }
@@ -95,8 +96,8 @@ namespace Gr8Food
 
             try
             {
-                AppRepository.CancelOrder(order.OrderId, AppSession.CurrentUser.UserId);
-                AppSession.CurrentUser = AppRepository.GetUserById(AppSession.CurrentUser.UserId);
+                _repository.CancelOrder(order.OrderId, AppSession.CurrentUser.UserId);
+                AppSession.CurrentUser = _repository.GetUserById(AppSession.CurrentUser.UserId);
                 MessageBox.Show("Order cancelled and refund returned to the e-wallet.");
                 Setup();
             }
@@ -140,8 +141,8 @@ namespace Gr8Food
 
             try
             {
-                AppRepository.TopUpWallet(AppSession.CurrentUser.UserId, amount);
-                AppSession.CurrentUser = AppRepository.GetUserById(AppSession.CurrentUser.UserId);
+                _repository.TopUpWallet(AppSession.CurrentUser.UserId, amount);
+                AppSession.CurrentUser = _repository.GetUserById(AppSession.CurrentUser.UserId);
                 MessageBox.Show("Top up successful.");
                 txtTopUpAmount.Clear();
                 Setup();

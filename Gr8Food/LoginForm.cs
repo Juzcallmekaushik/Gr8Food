@@ -5,6 +5,8 @@ namespace Gr8Food
 {
     public partial class LoginForm : Form
     {
+        private readonly AppRepository _repository = new AppRepository();
+
         public LoginForm()
         {
             InitializeComponent();
@@ -29,7 +31,7 @@ namespace Gr8Food
                 return;
             }
 
-            User user = AppRepository.Authenticate(username, password);
+            User user = _repository.Authenticate(username, password);
             if (user == null)
             {
                 MessageBox.Show("Invalid login. Please check your username and password.");

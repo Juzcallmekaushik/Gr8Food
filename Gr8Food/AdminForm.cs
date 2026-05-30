@@ -6,6 +6,7 @@ namespace Gr8Food
 {
     public partial class AdminForm : Form
     {
+        private readonly AppRepository _repository = new AppRepository();
         private List<User> _users = new List<User>();
 
         public AdminForm()
@@ -52,14 +53,14 @@ namespace Gr8Food
 
         private void LoadUsers()
         {
-            _users = AppRepository.GetAllUsers();
+            _users = _repository.GetAllUsers();
             lstUsers.DataSource = null;
             lstUsers.DataSource = _users;
         }
 
         private void LoadChefs()
         {
-            List<User> chefs = AppRepository.GetUsersByRole(DomainRules.RoleChef);
+            List<User> chefs = _repository.GetUsersByRole(DomainRules.RoleChef);
             object currentSelection = cmbChef.SelectedItem;
 
             cmbChef.Items.Clear();
@@ -111,7 +112,7 @@ namespace Gr8Food
             int? month = applyFilters ? (int?)dtpReportFilter.Value.Month : null;
             int? year = applyFilters ? (int?)dtpReportFilter.Value.Year : null;
 
-            lstReport.DataSource = AppRepository.GetSalesReport(month, year, chefUserId, category);
+            lstReport.DataSource = _repository.GetSalesReport(month, year, chefUserId, category);
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
@@ -123,13 +124,13 @@ namespace Gr8Food
 
             try
             {
-                if (AppRepository.UsernameExists(username, null))
+                if (_repository.UsernameExists(username, null))
                 {
                     MessageBox.Show("Username already exists.");
                     return;
                 }
 
-                AppRepository.AddUser(username, fullName, password, role);
+                _repository.AddUser(username, fullName, password, role);
                 MessageBox.Show("User added successfully.");
                 txtNewFullName.Clear();
                 txtNewUsername.Clear();
@@ -158,7 +159,7 @@ namespace Gr8Food
             }
 
             string reason;
-            if (!AppRepository.DeleteUser(selectedUser.UserId, out reason))
+            if (!_repository.DeleteUser(selectedUser.UserId, out reason))
             {
                 MessageBox.Show(reason);
                 return;
@@ -183,13 +184,13 @@ namespace Gr8Food
 
             try
             {
-                if (AppRepository.UsernameExists(username, selectedUser.UserId))
+                if (_repository.UsernameExists(username, selectedUser.UserId))
                 {
                     MessageBox.Show("That username is already being used by another account.");
                     return;
                 }
 
-                AppRepository.UpdateUserByAdmin(selectedUser.UserId, username, fullName, password, role);
+                _repository.UpdateUserByAdmin(selectedUser.UserId, username, fullName, password, role);
                 MessageBox.Show("User updated successfully.");
                 RefreshData();
             }

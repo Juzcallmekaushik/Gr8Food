@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Gr8Food
 {
-    internal static class Program
+    public class Program
     {
         [STAThread]
         private static void Main()
@@ -13,13 +13,14 @@ namespace Gr8Food
 
             try
             {
-                Database.InitializeDatabase();
+                Database database = new Database();
+                database.InitializeDatabase();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "The application could not connect to SQL Server LocalDB.\n\n" +
-                    "Please ensure LocalDB is installed or update the connection string in App.config.\n\n" +
+                    "The application could not connect to SQL Server.\n\n" +
+                    "Please ensure SQL Server is running or update the connection string in App.config.\n\n" +
                     ex.Message,
                     "Database Setup Error",
                     MessageBoxButtons.OK,

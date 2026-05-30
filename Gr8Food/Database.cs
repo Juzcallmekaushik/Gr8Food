@@ -4,20 +4,20 @@ using System.Data.SqlClient;
 
 namespace Gr8Food
 {
-    public static class Database
+    public class Database
     {
-        private static readonly string MasterConnectionString =
+        private readonly string _masterConnectionString =
             ConfigurationManager.ConnectionStrings["MasterConnection"].ConnectionString;
 
-        private static readonly string AppConnectionString =
+        private readonly string _connectionString =
             ConfigurationManager.ConnectionStrings["Gr8FoodConnection"].ConnectionString;
 
-        public static SqlConnection CreateConnection()
+        public SqlConnection GetConnection()
         {
-            return new SqlConnection(AppConnectionString);
+            return new SqlConnection(_connectionString);
         }
 
-        public static void InitializeDatabase()
+        public void InitializeDatabase()
         {
             CreateDatabaseIfNeeded();
             CreateTablesIfNeeded();
@@ -26,7 +26,7 @@ namespace Gr8Food
             UpgradePlaintextPasswords();
         }
 
-        private static void CreateDatabaseIfNeeded()
+        private void CreateDatabaseIfNeeded()
         {
             const string sql = @"
                 IF DB_ID('Gr8FoodDb') IS NULL
@@ -34,7 +34,7 @@ namespace Gr8Food
                     CREATE DATABASE Gr8FoodDb;
                 END";
 
-            using (SqlConnection connection = new SqlConnection(MasterConnectionString))
+            using (SqlConnection connection = new SqlConnection(_masterConnectionString))
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 connection.Open();
@@ -42,7 +42,7 @@ namespace Gr8Food
             }
         }
 
-        private static void CreateTablesIfNeeded()
+        private void CreateTablesIfNeeded()
         {
             const string sql = @"
 IF OBJECT_ID('dbo.Users', 'U') IS NULL
@@ -124,7 +124,7 @@ BEGIN
     );
 END;";
 
-            using (SqlConnection connection = CreateConnection())
+            using (SqlConnection connection = GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 connection.Open();
@@ -132,7 +132,7 @@ END;";
             }
         }
 
-        private static void ApplySchemaUpgrades()
+        private void ApplySchemaUpgrades()
         {
             string sql = string.Format(@"
 IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = 'CK_Users_Role')
@@ -229,7 +229,7 @@ END;",
                 DomainRules.WalletTypePayment,
                 DomainRules.WalletTypeRefund);
 
-            using (SqlConnection connection = CreateConnection())
+            using (SqlConnection connection = GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 connection.Open();
@@ -237,59 +237,202 @@ END;",
             }
         }
 
-        private static void SeedDataIfNeeded()
+        private void SeedDataIfNeeded()
         {
             const string sql = @"
-IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'admin')
+DECLARE @DefaultPassword NVARCHAR(50) = '123';
+
+UPDATE dbo.Users
+SET Username = CONCAT('legacy_', UserId, '_', Username),
+    IsDeleted = 1
+WHERE Username IN ('manager', 'chef', 'cust1', 'cust2', 'cust3')
+  AND IsDeleted = 0;
+
+UPDATE dbo.MenuItems
+SET IsAvailable = 0
+WHERE ChefUserId IN (SELECT UserId FROM dbo.Users WHERE IsDeleted = 1);
+
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'admin')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Admin',
+        [Password] = @DefaultPassword,
+        [Role] = 'Admin',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'admin';
+END
+ELSE
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
-    VALUES ('admin', 'System Admin', '123', 'Admin', 100.00);
+    VALUES ('admin', 'Admin', @DefaultPassword, 'Admin', 100.00);
 END;
 
-IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'manager')
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'kaushik')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Kaushik',
+        [Password] = @DefaultPassword,
+        [Role] = 'Admin',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'kaushik';
+END
+ELSE
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
-    VALUES ('manager', 'Restaurant Manager', '123', 'Manager', 100.00);
+    VALUES ('kaushik', 'Kaushik', @DefaultPassword, 'Admin', 100.00);
 END;
 
-IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'chef')
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'shaib')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Shaib',
+        [Password] = @DefaultPassword,
+        [Role] = 'Chef',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'shaib';
+END
+ELSE
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
-    VALUES ('chef', 'Main Chef', '123', 'Chef', 100.00);
+    VALUES ('shaib', 'Shaib', @DefaultPassword, 'Chef', 100.00);
 END;
 
-IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'cust1')
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'hussain')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Hussain',
+        [Password] = @DefaultPassword,
+        [Role] = 'Chef',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'hussain';
+END
+ELSE
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
-    VALUES ('cust1', 'Customer One', '123', 'Customer', 100.00);
+    VALUES ('hussain', 'Hussain', @DefaultPassword, 'Chef', 100.00);
 END;
 
-IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'cust2')
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'saiyam')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Saiyam',
+        [Password] = @DefaultPassword,
+        [Role] = 'Manager',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'saiyam';
+END
+ELSE
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
-    VALUES ('cust2', 'Customer Two', '123', 'Customer', 100.00);
+    VALUES ('saiyam', 'Saiyam', @DefaultPassword, 'Manager', 100.00);
 END;
 
-IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'cust3')
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'tom')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Tom',
+        [Password] = @DefaultPassword,
+        [Role] = 'Manager',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'tom';
+END
+ELSE
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
-    VALUES ('cust3', 'Customer Three', '123', 'Customer', 100.00);
+    VALUES ('tom', 'Tom', @DefaultPassword, 'Manager', 100.00);
 END;
 
-IF NOT EXISTS (SELECT 1 FROM dbo.MenuItems)
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'leong')
 BEGIN
-    DECLARE @ChefId INT = (SELECT TOP 1 UserId FROM dbo.Users WHERE Username = 'chef');
+    UPDATE dbo.Users
+    SET FullName = 'Leong',
+        [Password] = @DefaultPassword,
+        [Role] = 'Customer',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'leong';
+END
+ELSE
+BEGIN
+    INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
+    VALUES ('leong', 'Leong', @DefaultPassword, 'Customer', 100.00);
+END;
 
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'aisha')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Aisha Tan',
+        [Password] = @DefaultPassword,
+        [Role] = 'Customer',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'aisha';
+END
+ELSE
+BEGIN
+    INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
+    VALUES ('aisha', 'Aisha Tan', @DefaultPassword, 'Customer', 100.00);
+END;
+
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'daniel')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Daniel Wong',
+        [Password] = @DefaultPassword,
+        [Role] = 'Customer',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'daniel';
+END
+ELSE
+BEGIN
+    INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
+    VALUES ('daniel', 'Daniel Wong', @DefaultPassword, 'Customer', 100.00);
+END;
+
+IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'priya')
+BEGIN
+    UPDATE dbo.Users
+    SET FullName = 'Priya Nair',
+        [Password] = @DefaultPassword,
+        [Role] = 'Customer',
+        WalletBalance = 100.00,
+        IsDeleted = 0
+    WHERE Username = 'priya';
+END
+ELSE
+BEGIN
+    INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
+    VALUES ('priya', 'Priya Nair', @DefaultPassword, 'Customer', 100.00);
+END;
+
+DECLARE @ShaibId INT = (SELECT UserId FROM dbo.Users WHERE Username = 'shaib' AND IsDeleted = 0);
+DECLARE @HussainId INT = (SELECT UserId FROM dbo.Users WHERE Username = 'hussain' AND IsDeleted = 0);
+
+IF NOT EXISTS (SELECT 1 FROM dbo.MenuItems WHERE ChefUserId = @ShaibId AND [Name] = 'Nasi Lemak')
+BEGIN
     INSERT INTO dbo.MenuItems (ChefUserId, [Name], Category, Price, IsAvailable)
     VALUES
-        (@ChefId, 'Nasi Lemak', 'Breakfast', 8.50, 1),
-        (@ChefId, 'Chicken Chop', 'Dinner', 18.00, 1),
-        (@ChefId, 'Club Sandwich', 'Lunch', 12.50, 1),
-        (@ChefId, 'French Fries', 'Snacks', 6.50, 1),
-        (@ChefId, 'Iced Lemon Tea', 'Drinks', 4.50, 1);
+        (@ShaibId, 'Nasi Lemak', 'Breakfast', 8.50, 1),
+        (@ShaibId, 'Chicken Chop', 'Dinner', 18.00, 1),
+        (@ShaibId, 'Iced Lemon Tea', 'Drinks', 4.50, 1);
+END;
+
+IF NOT EXISTS (SELECT 1 FROM dbo.MenuItems WHERE ChefUserId = @HussainId AND [Name] = 'Club Sandwich')
+BEGIN
+    INSERT INTO dbo.MenuItems (ChefUserId, [Name], Category, Price, IsAvailable)
+    VALUES
+        (@HussainId, 'Club Sandwich', 'Lunch', 12.50, 1),
+        (@HussainId, 'French Fries', 'Snacks', 6.50, 1);
 END;";
 
-            using (SqlConnection connection = CreateConnection())
+            using (SqlConnection connection = GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 connection.Open();
@@ -297,14 +440,14 @@ END;";
             }
         }
 
-        private static void UpgradePlaintextPasswords()
+        private void UpgradePlaintextPasswords()
         {
             const string selectSql = @"
 SELECT UserId, [Password]
 FROM dbo.Users
 WHERE IsDeleted = 0;";
 
-            using (SqlConnection connection = CreateConnection())
+            using (SqlConnection connection = GetConnection())
             using (SqlCommand command = new SqlCommand(selectSql, connection))
             {
                 connection.Open();

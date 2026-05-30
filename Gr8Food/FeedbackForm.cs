@@ -5,6 +5,7 @@ namespace Gr8Food
 {
     public partial class FeedbackForm : Form
     {
+        private readonly AppRepository _repository = new AppRepository();
         private readonly int _orderId;
         private readonly string _itemName;
 
@@ -29,7 +30,7 @@ namespace Gr8Food
 
             try
             {
-                AppRepository.AddFeedback(_orderId, AppSession.CurrentUser.UserId, message);
+                _repository.AddFeedback(_orderId, AppSession.CurrentUser.UserId, message);
                 MessageBox.Show(string.Format("Feedback for {0} submitted successfully.", _itemName));
                 DialogResult = DialogResult.OK;
                 Close();

@@ -28,9 +28,11 @@ namespace Gr8Food
         }
     }
 
-    public static class AppRepository
+    public class AppRepository
     {
-        public static User Authenticate(string username, string password)
+        private readonly Database _database = new Database();
+
+        public User Authenticate(string username, string password)
         {
             username = InputValidator.ValidateUsername(username);
             password = InputValidator.ValidatePassword(password);
@@ -40,7 +42,7 @@ SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
 FROM dbo.Users
 WHERE Username = @Username AND IsDeleted = 0;";
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Username", username);
@@ -72,14 +74,14 @@ WHERE Username = @Username AND IsDeleted = 0;";
             }
         }
 
-        public static User GetUserById(int userId)
+        public User GetUserById(int userId)
         {
             const string sql = @"
 SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
 FROM dbo.Users
 WHERE UserId = @UserId AND IsDeleted = 0;";
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@UserId", userId);
@@ -92,7 +94,7 @@ WHERE UserId = @UserId AND IsDeleted = 0;";
             }
         }
 
-        public static List<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             const string sql = @"
 SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
@@ -102,7 +104,7 @@ ORDER BY [Role], Username;";
 
             List<User> users = new List<User>();
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 connection.Open();
@@ -118,7 +120,7 @@ ORDER BY [Role], Username;";
             return users;
         }
 
-        public static List<User> GetUsersByRole(string role)
+        public List<User> GetUsersByRole(string role)
         {
             const string sql = @"
 SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
@@ -129,7 +131,7 @@ ORDER BY Username;";
 
             List<User> users = new List<User>();
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Role", role);
@@ -146,7 +148,7 @@ ORDER BY Username;";
             return users;
         }
 
-        public static void AddUser(string username, string fullName, string password, string role)
+        public void AddUser(string username, string fullName, string password, string role)
         {
             username = InputValidator.ValidateUsername(username);
             fullName = InputValidator.ValidateFullName(fullName);
@@ -157,7 +159,7 @@ ORDER BY Username;";
 INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
 VALUES (@Username, @FullName, @Password, @Role, 100.00);";
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Username", username);
@@ -169,7 +171,7 @@ VALUES (@Username, @FullName, @Password, @Role, 100.00);";
             }
         }
 
-        public static void UpdateUserByAdmin(int userId, string username, string fullName, string password, string role)
+        public void UpdateUserByAdmin(int userId, string username, string fullName, string password, string role)
         {
             username = InputValidator.ValidateUsername(username);
             fullName = InputValidator.ValidateFullName(fullName);
@@ -184,7 +186,7 @@ SET Username = @Username,
     [Role] = @Role
 WHERE UserId = @UserId;";
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Username", username);
@@ -197,7 +199,7 @@ WHERE UserId = @UserId;";
             }
         }
 
-        public static bool UsernameExists(string username, int? excludeUserId)
+        public bool UsernameExists(string username, int? excludeUserId)
         {
             const string sql = @"
 SELECT COUNT(1)
@@ -206,7 +208,7 @@ WHERE Username = @Username
   AND IsDeleted = 0
   AND (@ExcludeUserId IS NULL OR UserId <> @ExcludeUserId);";
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Username", username);
@@ -216,7 +218,7 @@ WHERE Username = @Username
             }
         }
 
-        public static bool DeleteUser(int userId, out string reason)
+        public bool DeleteUser(int userId, out string reason)
         {
             reason = string.Empty;
 
@@ -229,7 +231,7 @@ WHERE Username = @Username
                 return true;
             }
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand("DELETE FROM dbo.Users WHERE UserId = @UserId;", connection))
             {
                 command.Parameters.AddWithValue("@UserId", userId);
@@ -240,7 +242,7 @@ WHERE Username = @Username
             return true;
         }
 
-        private static void ArchiveUser(int userId)
+        private void ArchiveUser(int userId)
         {
             const string sql = @"
 UPDATE dbo.Users
@@ -250,7 +252,7 @@ SET Username = CONCAT('arch_', UserId),
 WHERE UserId = @UserId
   AND IsDeleted = 0;";
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@UserId", userId);
@@ -259,7 +261,7 @@ WHERE UserId = @UserId
             }
         }
 
-        public static User UpdateOwnProfile(int userId, string username, string fullName, string password)
+        public User UpdateOwnProfile(int userId, string username, string fullName, string password)
         {
             username = InputValidator.ValidateUsername(username);
             fullName = InputValidator.ValidateFullName(fullName);
@@ -272,7 +274,7 @@ SET Username = @Username,
     [Password] = @Password
 WHERE UserId = @UserId;";
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Username", username);
@@ -286,7 +288,7 @@ WHERE UserId = @UserId;";
             return GetUserById(userId);
         }
 
-        public static List<SalesReportItem> GetSalesReport(int? month, int? year, int? chefUserId, string category)
+        public List<SalesReportItem> GetSalesReport(int? month, int? year, int? chefUserId, string category)
         {
             if (!string.Equals(category, DomainRules.CategoryAll, StringComparison.OrdinalIgnoreCase))
             {
@@ -305,7 +307,7 @@ ORDER BY OrderDate DESC;";
 
             List<SalesReportItem> report = new List<SalesReportItem>();
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Month", (object)month ?? DBNull.Value);
@@ -336,7 +338,7 @@ ORDER BY OrderDate DESC;";
             return report;
         }
 
-        public static List<MenuItem> GetMenuForChef(int chefUserId)
+        public List<MenuItem> GetMenuForChef(int chefUserId)
         {
             const string sql = @"
 SELECT m.MenuItemId, m.ChefUserId, u.FullName AS ChefName, m.Name, m.Category, m.Price, m.IsAvailable
@@ -348,25 +350,26 @@ ORDER BY m.Name;";
             return GetMenuItems(sql, new SqlParameter("@ChefUserId", chefUserId));
         }
 
-        public static List<MenuItem> GetAvailableMenu()
+        public List<MenuItem> GetAvailableMenu()
         {
             const string sql = @"
 SELECT m.MenuItemId, m.ChefUserId, u.FullName AS ChefName, m.Name, m.Category, m.Price, m.IsAvailable
 FROM dbo.MenuItems m
 INNER JOIN dbo.Users u ON m.ChefUserId = u.UserId
 WHERE m.IsAvailable = 1
+  AND u.IsDeleted = 0
 ORDER BY m.Category, m.Name;";
 
             return GetMenuItems(sql);
         }
 
-        public static void AddMenuItem(int chefUserId, string name, string category, decimal price, bool isAvailable)
+        public void AddMenuItem(int chefUserId, string name, string category, decimal price, bool isAvailable)
         {
             name = InputValidator.ValidateMenuItemName(name);
             category = InputValidator.ValidateCategory(category);
             price = InputValidator.ValidatePositiveAmount("Price", price);
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(@"
 INSERT INTO dbo.MenuItems (ChefUserId, [Name], Category, Price, IsAvailable)
 VALUES (@ChefUserId, @Name, @Category, @Price, @IsAvailable);", connection))
@@ -381,13 +384,13 @@ VALUES (@ChefUserId, @Name, @Category, @Price, @IsAvailable);", connection))
             }
         }
 
-        public static void UpdateMenuItem(int menuItemId, int chefUserId, string name, string category, decimal price, bool isAvailable)
+        public void UpdateMenuItem(int menuItemId, int chefUserId, string name, string category, decimal price, bool isAvailable)
         {
             name = InputValidator.ValidateMenuItemName(name);
             category = InputValidator.ValidateCategory(category);
             price = InputValidator.ValidatePositiveAmount("Price", price);
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(@"
 UPDATE dbo.MenuItems
 SET [Name] = @Name,
@@ -408,9 +411,9 @@ WHERE MenuItemId = @MenuItemId
             }
         }
 
-        public static void DeleteMenuItem(int menuItemId, int chefUserId)
+        public void DeleteMenuItem(int menuItemId, int chefUserId)
         {
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(@"
 DELETE FROM dbo.MenuItems
 WHERE MenuItemId = @MenuItemId
@@ -423,7 +426,7 @@ WHERE MenuItemId = @MenuItemId
             }
         }
 
-        public static List<Order> GetOrdersForChef(int chefUserId)
+        public List<Order> GetOrdersForChef(int chefUserId)
         {
             return GetOrders(@"
 SELECT OrderId, CustomerUserId, ChefUserId, CustomerName, ChefName, ItemName, Category, Price, [Status], OrderDate
@@ -432,7 +435,7 @@ WHERE ChefUserId = @ChefUserId
 ORDER BY OrderDate DESC;", new SqlParameter("@ChefUserId", chefUserId));
         }
 
-        public static List<Order> GetOrdersForCustomer(int customerUserId)
+        public List<Order> GetOrdersForCustomer(int customerUserId)
         {
             return GetOrders(@"
 SELECT OrderId, CustomerUserId, ChefUserId, CustomerName, ChefName, ItemName, Category, Price, [Status], OrderDate
@@ -441,7 +444,7 @@ WHERE CustomerUserId = @CustomerUserId
 ORDER BY OrderDate DESC;", new SqlParameter("@CustomerUserId", customerUserId));
         }
 
-        public static void UpdateOrderStatus(int orderId, int chefUserId, string currentStatus, string newStatus)
+        public void UpdateOrderStatus(int orderId, int chefUserId, string currentStatus, string newStatus)
         {
             if (!DomainRules.ContainsIgnoreCase(DomainRules.OrderStatuses, currentStatus) ||
                 !DomainRules.ContainsIgnoreCase(DomainRules.OrderStatuses, newStatus))
@@ -449,7 +452,7 @@ ORDER BY OrderDate DESC;", new SqlParameter("@CustomerUserId", customerUserId));
                 throw new InvalidOperationException("A valid order status is required.");
             }
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(@"
 UPDATE dbo.Orders
 SET [Status] = @NewStatus
@@ -466,7 +469,7 @@ WHERE OrderId = @OrderId
             }
         }
 
-        public static void PlaceOrder(int customerUserId, int menuItemId)
+        public void PlaceOrder(int customerUserId, int menuItemId)
         {
             const string menuSql = @"
 SELECT m.MenuItemId, m.ChefUserId, u.FullName AS ChefName, m.Name, m.Category, m.Price, m.IsAvailable
@@ -479,7 +482,7 @@ SELECT UserId, Username, FullName, [Password], [Role], WalletBalance
 FROM dbo.Users
 WHERE UserId = @UserId;";
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             {
                 connection.Open();
                 using (SqlTransaction transaction = connection.BeginTransaction())
@@ -574,9 +577,9 @@ VALUES (@CustomerUserId, @ChefUserId, @CustomerName, @ChefName, @ItemName, @Cate
             }
         }
 
-        public static void CancelOrder(int orderId, int customerUserId)
+        public void CancelOrder(int orderId, int customerUserId)
         {
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             {
                 connection.Open();
                 using (SqlTransaction transaction = connection.BeginTransaction())
@@ -655,11 +658,11 @@ WHERE UserId = @UserId;", connection, transaction))
             }
         }
 
-        public static void TopUpWallet(int customerUserId, decimal amount)
+        public void TopUpWallet(int customerUserId, decimal amount)
         {
             amount = InputValidator.ValidatePositiveAmount("Top-up amount", amount);
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             {
                 connection.Open();
                 using (SqlTransaction transaction = connection.BeginTransaction())
@@ -699,7 +702,7 @@ WHERE UserId = @UserId;", connection, transaction))
             }
         }
 
-        public static List<WalletTransaction> GetWalletTransactions(int? customerUserId, int month, int year)
+        public List<WalletTransaction> GetWalletTransactions(int? customerUserId, int month, int year)
         {
             const string sql = @"
 SELECT TransactionId, CustomerUserId, CustomerName, Amount, [Type], TransactionDate
@@ -711,7 +714,7 @@ ORDER BY TransactionDate DESC;";
 
             List<WalletTransaction> transactions = new List<WalletTransaction>();
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@Month", month);
@@ -738,7 +741,7 @@ ORDER BY TransactionDate DESC;";
             return transactions;
         }
 
-        public static List<Feedback> GetAllFeedback()
+        public List<Feedback> GetAllFeedback()
         {
             return GetFeedback(@"
 SELECT FeedbackId, OrderId, CustomerUserId, CustomerName, ItemName, Message, Reply, FeedbackDate, ReplyDate
@@ -746,7 +749,7 @@ FROM dbo.Feedbacks
 ORDER BY FeedbackDate DESC;");
         }
 
-        public static List<Feedback> GetFeedbackByCustomer(int customerUserId)
+        public List<Feedback> GetFeedbackByCustomer(int customerUserId)
         {
             return GetFeedback(@"
 SELECT FeedbackId, OrderId, CustomerUserId, CustomerName, ItemName, Message, Reply, FeedbackDate, ReplyDate
@@ -755,11 +758,11 @@ WHERE CustomerUserId = @CustomerUserId
 ORDER BY FeedbackDate DESC;", new SqlParameter("@CustomerUserId", customerUserId));
         }
 
-        public static void AddFeedback(int orderId, int customerUserId, string message)
+        public void AddFeedback(int orderId, int customerUserId, string message)
         {
             message = InputValidator.ValidateFeedbackMessage(message, "Feedback");
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             {
                 connection.Open();
 
@@ -803,11 +806,11 @@ WHERE o.OrderId = @OrderId;", connection))
             }
         }
 
-        public static void ReplyToFeedback(int feedbackId, string reply)
+        public void ReplyToFeedback(int feedbackId, string reply)
         {
             reply = InputValidator.ValidateFeedbackMessage(reply, "Reply");
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(@"
 UPDATE dbo.Feedbacks
 SET Reply = @Reply,
@@ -821,11 +824,11 @@ WHERE FeedbackId = @FeedbackId;", connection))
             }
         }
 
-        private static List<MenuItem> GetMenuItems(string sql, params SqlParameter[] parameters)
+        private List<MenuItem> GetMenuItems(string sql, params SqlParameter[] parameters)
         {
             List<MenuItem> items = new List<MenuItem>();
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 if (parameters != null)
@@ -846,11 +849,11 @@ WHERE FeedbackId = @FeedbackId;", connection))
             return items;
         }
 
-        private static List<Order> GetOrders(string sql, params SqlParameter[] parameters)
+        private List<Order> GetOrders(string sql, params SqlParameter[] parameters)
         {
             List<Order> orders = new List<Order>();
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 if (parameters != null)
@@ -871,11 +874,11 @@ WHERE FeedbackId = @FeedbackId;", connection))
             return orders;
         }
 
-        private static List<Feedback> GetFeedback(string sql, params SqlParameter[] parameters)
+        private List<Feedback> GetFeedback(string sql, params SqlParameter[] parameters)
         {
             List<Feedback> feedbacks = new List<Feedback>();
 
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 if (parameters != null)
@@ -896,9 +899,9 @@ WHERE FeedbackId = @FeedbackId;", connection))
             return feedbacks;
         }
 
-        private static int GetRecordCount(string sql, int userId)
+        private int GetRecordCount(string sql, int userId)
         {
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 command.Parameters.AddWithValue("@UserId", userId);
@@ -907,9 +910,9 @@ WHERE FeedbackId = @FeedbackId;", connection))
             }
         }
 
-        private static void UpdateStoredPassword(int userId, string hashedPassword)
+        private void UpdateStoredPassword(int userId, string hashedPassword)
         {
-            using (SqlConnection connection = Database.CreateConnection())
+            using (SqlConnection connection = _database.GetConnection())
             using (SqlCommand command = new SqlCommand(
                 "UPDATE dbo.Users SET [Password] = @Password WHERE UserId = @UserId;",
                 connection))
@@ -921,7 +924,7 @@ WHERE FeedbackId = @FeedbackId;", connection))
             }
         }
 
-        private static User MapUser(SqlDataReader reader)
+        private User MapUser(SqlDataReader reader)
         {
             return new User
             {
@@ -934,7 +937,7 @@ WHERE FeedbackId = @FeedbackId;", connection))
             };
         }
 
-        private static MenuItem MapMenuItem(SqlDataReader reader)
+        private MenuItem MapMenuItem(SqlDataReader reader)
         {
             return new MenuItem
             {
@@ -948,7 +951,7 @@ WHERE FeedbackId = @FeedbackId;", connection))
             };
         }
 
-        private static Order MapOrder(SqlDataReader reader)
+        private Order MapOrder(SqlDataReader reader)
         {
             return new Order
             {
@@ -965,7 +968,7 @@ WHERE FeedbackId = @FeedbackId;", connection))
             };
         }
 
-        private static Feedback MapFeedback(SqlDataReader reader)
+        private Feedback MapFeedback(SqlDataReader reader)
         {
             return new Feedback
             {

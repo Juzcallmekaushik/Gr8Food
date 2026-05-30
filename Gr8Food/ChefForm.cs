@@ -6,6 +6,7 @@ namespace Gr8Food
 {
     public partial class ChefForm : Form
     {
+        private readonly AppRepository _repository = new AppRepository();
         private List<MenuItem> _menuItems = new List<MenuItem>();
         private List<Order> _orders = new List<Order>();
 
@@ -34,14 +35,14 @@ namespace Gr8Food
 
         private void LoadMenu()
         {
-            _menuItems = AppRepository.GetMenuForChef(AppSession.CurrentUser.UserId);
+            _menuItems = _repository.GetMenuForChef(AppSession.CurrentUser.UserId);
             lstMenu.DataSource = null;
             lstMenu.DataSource = _menuItems;
         }
 
         private void LoadOrders()
         {
-            _orders = AppRepository.GetOrdersForChef(AppSession.CurrentUser.UserId);
+            _orders = _repository.GetOrdersForChef(AppSession.CurrentUser.UserId);
             lstOrders.DataSource = null;
             lstOrders.DataSource = _orders;
         }
@@ -59,7 +60,7 @@ namespace Gr8Food
 
             try
             {
-                AppRepository.AddMenuItem(AppSession.CurrentUser.UserId, name, cmbCategory.Text, price, chkAvailable.Checked);
+                _repository.AddMenuItem(AppSession.CurrentUser.UserId, name, cmbCategory.Text, price, chkAvailable.Checked);
                 ClearMenuInputs();
                 LoadMenu();
                 MessageBox.Show("Menu item added successfully.");
@@ -87,7 +88,7 @@ namespace Gr8Food
 
             try
             {
-                AppRepository.UpdateMenuItem(menuItem.MenuItemId, AppSession.CurrentUser.UserId, txtMenuName.Text.Trim(), cmbCategory.Text, price, chkAvailable.Checked);
+                _repository.UpdateMenuItem(menuItem.MenuItemId, AppSession.CurrentUser.UserId, txtMenuName.Text.Trim(), cmbCategory.Text, price, chkAvailable.Checked);
                 MessageBox.Show("Menu item updated successfully.");
                 LoadMenu();
             }
@@ -105,7 +106,7 @@ namespace Gr8Food
                 return;
             }
 
-            AppRepository.DeleteMenuItem(menuItem.MenuItemId, AppSession.CurrentUser.UserId);
+            _repository.DeleteMenuItem(menuItem.MenuItemId, AppSession.CurrentUser.UserId);
             ClearMenuInputs();
             LoadMenu();
             MessageBox.Show("Menu item deleted successfully.");
@@ -139,7 +140,7 @@ namespace Gr8Food
                 return;
             }
 
-            AppRepository.UpdateOrderStatus(order.OrderId, AppSession.CurrentUser.UserId, DomainRules.OrderStatusPending, DomainRules.OrderStatusInProgress);
+            _repository.UpdateOrderStatus(order.OrderId, AppSession.CurrentUser.UserId, DomainRules.OrderStatusPending, DomainRules.OrderStatusInProgress);
             LoadOrders();
             MessageBox.Show("Order marked as In Progress.");
         }
@@ -158,7 +159,7 @@ namespace Gr8Food
                 return;
             }
 
-            AppRepository.UpdateOrderStatus(order.OrderId, AppSession.CurrentUser.UserId, DomainRules.OrderStatusInProgress, DomainRules.OrderStatusCompleted);
+            _repository.UpdateOrderStatus(order.OrderId, AppSession.CurrentUser.UserId, DomainRules.OrderStatusInProgress, DomainRules.OrderStatusCompleted);
             LoadOrders();
             MessageBox.Show("Order marked as Completed.");
         }
