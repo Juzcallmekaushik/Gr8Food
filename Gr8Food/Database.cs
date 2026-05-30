@@ -252,161 +252,61 @@ UPDATE dbo.MenuItems
 SET IsAvailable = 0
 WHERE ChefUserId IN (SELECT UserId FROM dbo.Users WHERE IsDeleted = 1);
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'admin')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Admin',
-        [Password] = @DefaultPassword,
-        [Role] = 'Admin',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'admin';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'admin')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('admin', 'Admin', @DefaultPassword, 'Admin', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'kaushik')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Kaushik',
-        [Password] = @DefaultPassword,
-        [Role] = 'Admin',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'kaushik';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'kaushik')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('kaushik', 'Kaushik', @DefaultPassword, 'Admin', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'shaib')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Shaib',
-        [Password] = @DefaultPassword,
-        [Role] = 'Chef',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'shaib';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'shaib')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('shaib', 'Shaib', @DefaultPassword, 'Chef', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'hussain')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Hussain',
-        [Password] = @DefaultPassword,
-        [Role] = 'Chef',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'hussain';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'hussain')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('hussain', 'Hussain', @DefaultPassword, 'Chef', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'saiyam')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Saiyam',
-        [Password] = @DefaultPassword,
-        [Role] = 'Manager',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'saiyam';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'saiyam')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('saiyam', 'Saiyam', @DefaultPassword, 'Manager', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'tom')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Tom',
-        [Password] = @DefaultPassword,
-        [Role] = 'Manager',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'tom';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'tom')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('tom', 'Tom', @DefaultPassword, 'Manager', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'leong')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Leong',
-        [Password] = @DefaultPassword,
-        [Role] = 'Customer',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'leong';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'leong')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('leong', 'Leong', @DefaultPassword, 'Customer', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'aisha')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Aisha Tan',
-        [Password] = @DefaultPassword,
-        [Role] = 'Customer',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'aisha';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'aisha')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('aisha', 'Aisha Tan', @DefaultPassword, 'Customer', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'daniel')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Daniel Wong',
-        [Password] = @DefaultPassword,
-        [Role] = 'Customer',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'daniel';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'daniel')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('daniel', 'Daniel Wong', @DefaultPassword, 'Customer', 100.00);
 END;
 
-IF EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'priya')
-BEGIN
-    UPDATE dbo.Users
-    SET FullName = 'Priya Nair',
-        [Password] = @DefaultPassword,
-        [Role] = 'Customer',
-        WalletBalance = 100.00,
-        IsDeleted = 0
-    WHERE Username = 'priya';
-END
-ELSE
+IF NOT EXISTS (SELECT 1 FROM dbo.Users WHERE Username = 'priya')
 BEGIN
     INSERT INTO dbo.Users (Username, FullName, [Password], [Role], WalletBalance)
     VALUES ('priya', 'Priya Nair', @DefaultPassword, 'Customer', 100.00);
@@ -419,9 +319,10 @@ IF NOT EXISTS (SELECT 1 FROM dbo.MenuItems WHERE ChefUserId = @ShaibId AND [Name
 BEGIN
     INSERT INTO dbo.MenuItems (ChefUserId, [Name], Category, Price, IsAvailable)
     VALUES
-        (@ShaibId, 'Nasi Lemak', 'Breakfast', 8.50, 1),
-        (@ShaibId, 'Chicken Chop', 'Dinner', 18.00, 1),
-        (@ShaibId, 'Iced Lemon Tea', 'Drinks', 4.50, 1);
+        (@ShaibId, 'Nasi Lemak', 'Breakfast', 5.00, 1),
+        (@ShaibId, 'Roti Canai', 'Breakfast', 1.50, 1),
+        (@ShaibId, 'Iced Lemon Tea', 'Drinks', 3.50, 1),
+        (@ShaibId, 'Milo Ais', 'Drinks', 3.40, 1);
 END;
 
 IF NOT EXISTS (SELECT 1 FROM dbo.MenuItems WHERE ChefUserId = @HussainId AND [Name] = 'Club Sandwich')
@@ -429,7 +330,11 @@ BEGIN
     INSERT INTO dbo.MenuItems (ChefUserId, [Name], Category, Price, IsAvailable)
     VALUES
         (@HussainId, 'Club Sandwich', 'Lunch', 12.50, 1),
-        (@HussainId, 'French Fries', 'Snacks', 6.50, 1);
+        (@HussainId, 'French Fries', 'Snacks', 6.50, 1),
+        (@HussainId, 'Chicken Nuggets', 'Snacks', 9.00, 1),
+        (@HussainId, 'Chicken Rice', 'Lunch', 10.00, 1);
+
+
 END;";
 
             using (SqlConnection connection = GetConnection())

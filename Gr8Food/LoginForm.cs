@@ -31,7 +31,17 @@ namespace Gr8Food
                 return;
             }
 
-            User user = _repository.Authenticate(username, password);
+            User user;
+            try
+            {
+                user = _repository.Authenticate(username, password);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
             if (user == null)
             {
                 MessageBox.Show("Invalid login. Please check your username and password.");
